@@ -1,1 +1,625 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KRYXOR — Worlds Beyond Imagination</title>
+<meta name="description" content="KRYXOR — Independent Creative Studio. Stories. Worlds. Technology.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Michroma&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#05080e;
+  --silver:#c5cbd3;
+  --blue:#55a9e8;
+  --steel:#778493;
+  --white:#edf3fa;
+  --line:rgba(151,183,216,.18);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{
+  margin:0;color:var(--white);background:var(--bg);
+  font-family:"Space Grotesk",Arial,sans-serif;overflow-x:hidden
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+
+/* KOSMICZNE TŁO */
+.space-background{
+  position:fixed;inset:0;z-index:-3;overflow:hidden;
+  background:
+    radial-gradient(ellipse at 50% 60%,rgba(13,67,119,.3),transparent 45%),
+    radial-gradient(ellipse at 12% 20%,rgba(12,67,130,.22),transparent 35%),
+    radial-gradient(ellipse at 90% 25%,rgba(15,56,105,.2),transparent 35%),
+    #03060c;
+}
+.space-background:before{
+  content:"";position:absolute;inset:0;
+  background-image:
+    radial-gradient(1px 1px at 12% 18%,#d8eaff 99%,transparent),
+    radial-gradient(1px 1px at 25% 72%,#a6d8ff 99%,transparent),
+    radial-gradient(2px 2px at 67% 24%,#d8eaff 99%,transparent),
+    radial-gradient(1px 1px at 81% 56%,#9bcfff 99%,transparent),
+    radial-gradient(1px 1px at 44% 39%,#fff 99%,transparent);
+  background-size:390px 310px;opacity:.7;
+}
+.space-art{position:absolute;inset:0;width:100%;height:100%;opacity:.9}
+.space-art svg{width:100%;height:100%}
+.space-shade{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(3,6,12,.42),transparent 48%,rgba(3,6,12,.35)),
+  linear-gradient(180deg,rgba(3,6,12,.2),transparent 35%,#05080e 96%);
+}
+
+/* NAWIGACJA */
+header{
+  position:fixed;z-index:20;top:0;left:0;width:100%;
+  background:rgba(4,8,14,.82);
+  border-bottom:1px solid var(--line);backdrop-filter:blur(16px);
+}
+.nav{
+  max-width:1440px;min-height:78px;padding:0 5%;margin:auto;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+}
+.logo{
+  display:inline-flex;align-items:center;white-space:nowrap;
+  font-family:"Michroma","Space Grotesk",sans-serif;
+  font-size:22px;font-weight:700;letter-spacing:.045em;
+  color:var(--silver);
+  text-shadow:0 2px 14px rgba(160,190,220,.25);
+}
+.logo .x{
+  color:var(--blue);font-size:1.48em;line-height:.8;
+  margin:0 1px;text-shadow:0 0 18px rgba(57,157,255,.8);
+}
+.nav-links{display:flex;align-items:center;gap:clamp(12px,2vw,26px)}
+.nav-links>a,.language button{
+  color:#b9c5d2;font-size:10px;font-weight:600;
+  letter-spacing:.13em;transition:color .2s;
+}
+.nav-links>a:hover,.language button:hover{color:var(--blue)}
+.language{white-space:nowrap;display:flex;align-items:center;gap:7px}
+.language button{
+  background:none;border:0;padding:8px 2px;cursor:pointer;
+}
+.language button.active{color:var(--blue)}
+.language span{color:#536477}
+.menu-toggle{
+  display:none;color:var(--silver);background:none;
+  border:1px solid var(--line);padding:9px 12px;cursor:pointer;
+}
+
+/* HERO */
+.hero{
+  min-height:100vh;padding:150px 24px 100px;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;position:relative;
+}
+.hero-content{width:min(100%,1000px)}
+.eyebrow{
+  color:var(--blue);font-size:11px;font-weight:700;
+  letter-spacing:.38em;text-transform:uppercase;
+}
+.hero-logo{
+  margin:25px 0 24px;
+  font-family:"Michroma","Space Grotesk",sans-serif;
+  font-size:clamp(54px,11vw,125px);font-weight:700;
+  letter-spacing:.025em;line-height:1.15;color:#d0d6df;
+  text-shadow:0 5px 3px #28394b,0 12px 35px rgba(0,0,0,.9),
+  0 0 30px rgba(158,192,226,.3);
+}
+.hero-logo .x{
+  display:inline-block;color:#55a9e8;font-size:1.42em;
+  line-height:.7;text-shadow:0 0 8px #168bff,0 0 28px #168bff,
+  0 0 60px rgba(0,126,255,.7);transform:translateY(5px);
+}
+.hero h1{
+  margin:0 auto;max-width:850px;color:#e6edf5;
+  font-size:clamp(19px,3vw,31px);line-height:1.4;
+  letter-spacing:.16em;font-weight:500;
+}
+.hero-description{
+  max-width:620px;margin:25px auto 0;color:#a9b8c8;
+  font-size:15px;line-height:1.9;
+}
+.hero-actions{
+  display:flex;justify-content:center;flex-wrap:wrap;
+  gap:14px;margin-top:36px;
+}
+.button{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:48px;padding:0 25px;
+  border:1px solid rgba(85,169,232,.65);
+  color:#dceeff;background:rgba(12,37,62,.42);
+  font-size:10px;font-weight:700;letter-spacing:.16em;
+  transition:.25s;cursor:pointer;
+}
+.button:hover{
+  background:rgba(37,112,177,.28);
+  box-shadow:0 0 28px rgba(44,143,225,.2);
+}
+.button.secondary{border-color:rgba(180,197,215,.3);background:rgba(8,13,21,.4)}
+.scroll-cue{
+  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+  color:#8195aa;font-size:9px;letter-spacing:.3em;
+}
+
+/* SEKCJE */
+section.content-section{
+  position:relative;padding:110px 6%;
+  border-top:1px solid rgba(133,172,211,.12);
+  background:linear-gradient(180deg,rgba(4,8,14,.86),rgba(4,8,14,.76));
+}
+.section-inner{max-width:1180px;margin:auto}
+.section-kicker{
+  color:var(--blue);font-size:10px;font-weight:700;
+  letter-spacing:.3em;margin-bottom:15px;
+}
+.section-title{
+  margin:0 0 24px;color:#e1e7ef;
+  font-size:clamp(30px,5vw,49px);
+  line-height:1.2;font-weight:500;letter-spacing:.04em;
+}
+.section-title .x{color:var(--blue)}
+.section-lead{
+  max-width:760px;color:#aab7c5;font-size:16px;line-height:1.9;
+}
+.about-grid{
+  display:grid;grid-template-columns:1.2fr .8fr;
+  gap:55px;align-items:center;
+}
+.about-mark{
+  min-height:260px;display:grid;place-items:center;
+  border:1px solid var(--line);
+  background:radial-gradient(ellipse,rgba(35,112,180,.2),transparent 65%),rgba(7,15,25,.55);
+}
+.about-mark .logo{font-size:clamp(35px,6vw,65px)}
+
+.cards{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:16px;margin-top:42px;
+}
+.project-card,.service-card,.portfolio-card,.ai-panel{
+  border:1px solid rgba(139,174,208,.2);
+  background:linear-gradient(145deg,rgba(16,33,51,.72),rgba(5,11,19,.84));
+  transition:border-color .25s,transform .25s;
+}
+.project-card{
+  min-height:190px;padding:25px;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.project-card:hover,.service-card:hover,.portfolio-card:hover{
+  border-color:rgba(85,169,232,.65);transform:translateY(-4px);
+}
+.project-number{color:#647b92;font-size:11px;letter-spacing:.2em}
+.project-card h3{color:#e1e9f2;font-size:18px;font-weight:500}
+.status{color:var(--blue);font-size:9px;letter-spacing:.2em}
+
+.services{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:12px;margin-top:38px;
+}
+.service-card{padding:24px 18px;min-height:112px}
+.service-card span{color:#aab9c9;font-size:13px;line-height:1.6}
+.service-card:before{
+  content:"";display:block;width:22px;height:2px;
+  margin-bottom:19px;background:var(--blue);
+  box-shadow:0 0 12px var(--blue);
+}
+.ai-panel{
+  margin-top:38px;padding:clamp(25px,5vw,55px);
+  background:radial-gradient(ellipse at 90% 20%,rgba(37,122,190,.2),transparent 45%),rgba(6,15,26,.8);
+}
+.ai-panel p{max-width:720px;color:#aab8c8;line-height:1.9}
+.ai-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}
+.ai-tags span{
+  padding:9px 13px;border:1px solid var(--line);
+  color:#b7c8d9;font-size:10px;letter-spacing:.1em;
+}
+.portfolio-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:14px;margin-top:38px;
+}
+.portfolio-card{
+  min-height:160px;padding:25px;display:flex;
+  flex-direction:column;justify-content:flex-end;
+  background:linear-gradient(0deg,rgba(3,8,15,.98),rgba(7,19,32,.5)),
+  radial-gradient(ellipse at 50% 0%,rgba(50,137,204,.25),transparent 70%);
+}
+.portfolio-card h3{margin:0 0 10px;font-size:17px;font-weight:500}
+.portfolio-card span{color:var(--blue);font-size:9px;letter-spacing:.2em}
+.contact-wrap{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:30px;flex-wrap:wrap;margin-top:35px;padding:35px;
+  border:1px solid var(--line);background:rgba(7,16,27,.8);
+}
+.email{
+  display:inline-block;margin-top:10px;color:#d7e6f5;
+  font-size:clamp(16px,3vw,23px);overflow-wrap:anywhere;
+}
+.contact-note{color:#91a3b6;font-size:13px;line-height:1.8}
+
+footer{
+  padding:38px 6%;background:#03060b;border-top:1px solid var(--line);
+}
+.footer-inner{
+  max-width:1180px;margin:auto;display:flex;
+  justify-content:space-between;align-items:center;gap:25px;flex-wrap:wrap;
+}
+.footer-inner .logo{font-size:19px}
+.footer-links{display:flex;flex-wrap:wrap;gap:18px}
+.footer-links a,.copyright{
+  color:#8190a1;font-size:10px;letter-spacing:.08em;
+}
+.footer-links a:hover{color:var(--blue)}
+.copyright{width:100%;margin-top:20px}
+
+@media(max-width:900px){
+  .nav{min-height:70px}
+  .menu-toggle{display:block}
+  .nav-links{
+    display:none;position:absolute;top:70px;left:0;right:0;
+    padding:25px 6%;background:rgba(4,8,14,.98);
+    border-bottom:1px solid var(--line);
+    flex-direction:column;align-items:flex-start;gap:22px;
+  }
+  .nav-links.open{display:flex}
+  .about-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .nav{padding:0 5%}
+  .logo{font-size:19px}
+  .hero{min-height:90vh;padding-top:130px}
+  .hero-logo{font-size:clamp(43px,12vw,70px)}
+  .hero h1{letter-spacing:.09em}
+  section.content-section{padding:78px 6%}
+  .cards,.portfolio-grid{grid-template-columns:1fr}
+  .services{grid-template-columns:1fr 1fr}
+  .contact-wrap{padding:23px}
+  .footer-inner{align-items:flex-start;flex-direction:column}
+}
+</style>
+</head>
+
+<body>
+
+<div class="space-background" aria-hidden="true">
+<div class="space-art">
+<svg viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <radialGradient id="planet" cx="50%" cy="25%" r="75%">
+    <stop offset="0" stop-color="#284d70"/>
+    <stop offset=".5" stop-color="#102a46"/>
+    <stop offset="1" stop-color="#02060d"/>
+  </radialGradient>
+  <linearGradient id="ship" x2="0" y2="1">
+    <stop stop-color="#b7d5ed"/><stop offset=".5" stop-color="#3d5b78"/>
+    <stop offset="1" stop-color="#101d2d"/>
+  </linearGradient>
+  <filter id="glow">
+    <feGaussianBlur stdDeviation="5" result="blur"/>
+    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+</defs>
+
+<circle cx="1320" cy="190" r="95" fill="#122a43" opacity=".8"/>
+<path d="M1220 190 Q1320 135 1420 190" fill="none" stroke="#5ca9dc" stroke-width="3" opacity=".45"/>
+<circle cx="220" cy="300" r="38" fill="#1b3853" opacity=".7"/>
+
+<path d="M-50 350 Q250 90 520 290 T1050 210 T1700 300" fill="none" stroke="#1265a5" stroke-width="100" opacity=".09" filter="url(#glow)"/>
+<path d="M-80 430 Q260 180 530 370 T1080 290 T1690 400" fill="none" stroke="#238bd5" stroke-width="24" opacity=".13" filter="url(#glow)"/>
+
+<g fill="none" stroke="#4baeff" filter="url(#glow)" opacity=".72">
+  <path d="M250 170 L300 245 L270 265 L365 365" stroke-width="2"/>
+  <path d="M1380 110 L1325 210 L1360 225 L1270 340" stroke-width="2"/>
+  <path d="M900 80 L860 150 L885 170 L820 250" stroke-width="1.5"/>
+</g>
+
+<path d="M-100 790 Q800 350 1700 790 L1700 1100 L-100 1100Z" fill="url(#planet)"/>
+<path d="M-100 790 Q800 350 1700 790" fill="none" stroke="#55a9e8" stroke-width="8" filter="url(#glow)"/>
+<path d="M-80 805 Q800 390 1680 805" fill="none" stroke="#83ceff" stroke-width="2" opacity=".65"/>
+<path d="M-40 830 Q800 455 1640 830" fill="none" stroke="#1d72b5" stroke-width="2" opacity=".3"/>
+
+<g fill="none" stroke="#3c8bc0" opacity=".18">
+  <path d="M200 840 Q360 760 490 820 T760 850"/>
+  <path d="M940 780 Q1100 730 1240 790 T1500 840"/>
+  <path d="M500 910 Q680 850 850 920"/>
+</g>
+
+<!-- Statek kosmiczny -->
+<g transform="translate(250 420) scale(1.1)">
+  <path d="M-115 0 L-35 -22 L70 -12 L130 0 L65 18 L-40 25Z" fill="url(#ship)" stroke="#8dbbe0" stroke-width="1.5"/>
+  <path d="M-35 -22 L-5 -58 L38 -20 L70 -12" fill="#294967" stroke="#7eb9e6"/>
+  <path d="M-40 24 L-65 48 L25 28" fill="#1a3047" stroke="#6a9cc4"/>
+  <path d="M-155 0 L-205 0" stroke="#48aaff" stroke-width="3" filter="url(#glow)"/>
+  <circle cx="65" cy="0" r="4" fill="#70caff" filter="url(#glow)"/>
+</g>
+
+<g transform="translate(1280 390) scale(.8)">
+  <path d="M-130 0 L-45 -18 L55 -12 L130 0 L50 20 L-45 22Z" fill="url(#ship)" stroke="#80b8df" stroke-width="1.5"/>
+  <path d="M-45 -18 L-15 -55 L40 -17" fill="#274765" stroke="#78b7e5"/>
+  <path d="M-45 22 L-72 50 L28 26" fill="#172a40" stroke="#5c91bb"/>
+  <path d="M130 0 L190 0" stroke="#55b7ff" stroke-width="3" filter="url(#glow)"/>
+  <circle cx="-20" cy="0" r="4" fill="#7ed2ff" filter="url(#glow)"/>
+</g>
+
+<!-- Małe myśliwce i wiązki laserów -->
+<g fill="#658ba9" stroke="#9bcdf0" stroke-width="1" opacity=".8">
+  <path d="M1030 280 l45 -9 25 10 -25 8Z"/>
+  <path d="M1070 280 l-12 -19 25 17"/>
+  <path d="M520 245 l30 -6 17 7 -17 6Z"/>
+</g>
+<g stroke="#48aaff" stroke-width="2" filter="url(#glow)" opacity=".8">
+  <path d="M1090 280 L1180 255"/>
+  <path d="M570 245 L635 225"/>
+  <path d="M340 420 L780 510" opacity=".65"/>
+  <path d="M1270 405 L920 490" opacity=".7"/>
+</g>
+
+<!-- Futurystyczna baza -->
+<g transform="translate(800 690)" fill="#071522" stroke="#3c82b4" stroke-width="2" opacity=".9">
+  <path d="M-180 80 L-150 10 L-90 -25 L-35 10 L0 -55 L35 10 L100 -20 L160 25 L190 80Z"/>
+  <path d="M-95 5 L-80 -60 L-40 -80 L-10 -60 L0 5Z"/>
+  <path d="M40 5 L65 -35 L100 -45 L130 5Z"/>
+  <path d="M-170 80 H190"/>
+  <path d="M-65 20 V65 M65 20 V65 M130 38 V65" stroke="#59b9f5" opacity=".8"/>
+</g>
+<path d="M625 765 H975" stroke="#55b7ff" stroke-width="3" filter="url(#glow)" opacity=".65"/>
+</svg>
+</div>
+<div class="space-shade"></div>
+</div>
+
+<header>
+<nav class="nav">
+  <a class="logo" href="#start" aria-label="KRYXOR home">KRY<span class="x">X</span>OR</a>
+  <button class="menu-toggle" id="menuToggle">MENU ☰</button>
+  <div class="nav-links" id="navLinks">
+    <a href="#start" data-en="HOME" data-pl="START">HOME</a>
+    <a href="#about" data-en="ABOUT" data-pl="O NAS">ABOUT</a>
+    <a href="#original">ORIGINAL</a>
+    <a href="#studio">STUDIO</a>
+    <a href="#ai">AI</a>
+    <a href="#portfolio">PORTFOLIO</a>
+    <a href="#contact" data-en="CONTACT" data-pl="KONTAKT">CONTACT</a>
+    <div class="language">
+      <button type="button" class="active" data-language="en">EN</button>
+      <span>|</span>
+      <button type="button" data-language="pl">PL</button>
+    </div>
+  </div>
+</nav>
+</header>
+
+<main>
+<section class="hero" id="start">
+  <div class="hero-content">
+    <div class="eyebrow">INDEPENDENT CREATIVE STUDIO</div>
+    <div class="hero-logo">KRY<span class="x">X</span>OR</div>
+    <h1 data-en="WORLDS BEYOND IMAGINATION."
+        data-pl="ŚWIATY POZA GRANICAMI WYOBRAŹNI.">WORLDS BEYOND IMAGINATION.</h1>
+    <p class="hero-description"
+       data-en="We create stories, visual worlds and experiences at the intersection of cinema, art, animation and emerging technology."
+       data-pl="Tworzymy historie, wizualne światy i doświadczenia na styku kina, sztuki, animacji oraz nowych technologii.">
+      We create stories, visual worlds and experiences at the intersection of cinema, art, animation and emerging technology.
+    </p>
+    <div class="hero-actions">
+      <a class="button" href="#original" data-en="EXPLORE OUR WORLDS" data-pl="POZNAJ NASZE ŚWIATY">EXPLORE OUR WORLDS</a>
+      <a class="button secondary" href="#contact" data-en="GET IN TOUCH" data-pl="SKONTAKTUJ SIĘ">GET IN TOUCH</a>
+    </div>
+  </div>
+  <div class="scroll-cue" data-en="DISCOVER KRYXOR ↓" data-pl="ODKRYJ KRYXOR ↓">DISCOVER KRYXOR ↓</div>
+</section>
+
+<section class="content-section" id="about">
+<div class="section-inner about-grid">
+  <div>
+    <div class="section-kicker">01 / <span data-en="ABOUT US" data-pl="O NAS">ABOUT US</span></div>
+    <h2 class="section-title" data-en="UNLIMITED CREATIVE POSSIBILITIES." data-pl="NIEOGRANICZONE MOŻLIWOŚCI TWORZENIA.">UNLIMITED CREATIVE POSSIBILITIES.</h2>
+    <p class="section-lead"
+       data-en="KRYXOR is an independent creative brand combining cinema, original storytelling, 3D animation, digital worlds, visual effects and emerging technologies. We are interested in what has yet to be created — new stories, new forms and new ways of seeing."
+       data-pl="KRYXOR to niezależna marka kreatywna łącząca kino, autorskie opowieści, animację 3D, cyfrowe światy, efekty wizualne i technologie przyszłości. Interesuje nas to, co dopiero może powstać — nowe historie, nowe formy i nowe sposoby opowiadania.">
+      KRYXOR is an independent creative brand combining cinema, original storytelling, 3D animation, digital worlds, visual effects and emerging technologies.
+    </p>
+  </div>
+  <div class="about-mark">
+    <div class="logo">KRY<span class="x">X</span>OR</div>
+  </div>
+</div>
+</section>
+
+<section class="content-section" id="original">
+<div class="section-inner">
+  <div class="section-kicker">02 / <span data-en="ORIGINAL PRODUCTIONS" data-pl="AUTORSKIE PRODUKCJE">ORIGINAL PRODUCTIONS</span></div>
+  <h2 class="section-title">KRY<span class="x">X</span>OR <span data-en="ORIGINAL" data-pl="ORIGINAL">ORIGINAL</span></h2>
+  <p class="section-lead"
+     data-en="Original films, series and creative universes. Stories that take audiences beyond the boundaries of familiar reality."
+     data-pl="Oryginalne filmy, seriale i autorskie światy. Historie, które zabierają widzów poza granice znanej rzeczywistości.">
+    Original films, series and creative universes. Stories that take audiences beyond the boundaries of familiar reality.
+  </p>
+  <div class="cards">
+    <article class="project-card"><span class="project-number">PROJECT 01</span><h3 data-en="FEATURE FILMS" data-pl="FILMY FABULARNE">FEATURE FILMS</h3><span class="status">COMING SOON</span></article>
+    <article class="project-card"><span class="project-number">PROJECT 02</span><h3 data-en="SERIES" data-pl="SERIALE">SERIES</h3><span class="status">COMING SOON</span></article>
+    <article class="project-card"><span class="project-number">PROJECT 03</span><h3 data-en="UNIVERSES & WORLDS" data-pl="UNIWERSA I ŚWIATY">UNIVERSES & WORLDS</h3><span class="status">COMING SOON</span></article>
+    <article class="project-card"><span class="project-number">PROJECT 04</span><h3 data-en="SHORT FILMS" data-pl="KRÓTKIE FORMY">SHORT FILMS</h3><span class="status">COMING SOON</span></article>
+    <article class="project-card"><span class="project-number">PROJECT 05</span><h3 data-en="EXPERIMENTAL PROJECTS" data-pl="PROJEKTY EKSPERYMENTALNE">EXPERIMENTAL PROJECTS</h3><span class="status">COMING SOON</span></article>
+  </div>
+</div>
+</section>
+
+<section class="content-section" id="studio">
+<div class="section-inner">
+  <div class="section-kicker">03 / <span data-en="CREATION & PRODUCTION" data-pl="KREACJA I PRODUKCJA">CREATION & PRODUCTION</span></div>
+  <h2 class="section-title">KRY<span class="x">X</span>OR <span data-en="STUDIO" data-pl="STUDIO">STUDIO</span></h2>
+  <p class="section-lead"
+     data-en="Image, movement, space and digital imagination. We create visual experiences using contemporary creative tools."
+     data-pl="Obraz, ruch, przestrzeń i cyfrowa wyobraźnia. Tworzymy wizualne doświadczenia z wykorzystaniem współczesnych narzędzi.">
+    Image, movement, space and digital imagination. We create visual experiences using contemporary creative tools.
+  </p>
+  <div class="services">
+    <div class="service-card"><span data-en="3D Animation" data-pl="Animacja 3D">3D Animation</span></div>
+    <div class="service-card"><span data-en="Character Animation" data-pl="Animacja postaci">Character Animation</span></div>
+    <div class="service-card"><span data-en="Digital Environments" data-pl="Cyfrowe środowiska">Digital Environments</span></div>
+    <div class="service-card"><span data-en="Visual Effects / VFX" data-pl="Efekty wizualne VFX">Visual Effects / VFX</span></div>
+    <div class="service-card"><span data-en="Virtual Production" data-pl="Wirtualna produkcja">Virtual Production</span></div>
+    <div class="service-card"><span data-en="Cinematic Visualisation" data-pl="Wizualizacje filmowe">Cinematic Visualisation</span></div>
+    <div class="service-card"><span data-en="Digital Art" data-pl="Sztuka cyfrowa">Digital Art</span></div>
+    <div class="service-card"><span data-en="Post-production" data-pl="Postprodukcja">Post-production</span></div>
+  </div>
+</div>
+</section>
+
+<section class="content-section" id="ai">
+<div class="section-inner">
+  <div class="section-kicker">04 / <span data-en="TECHNOLOGY & EXPERIMENTATION" data-pl="TECHNOLOGIA I EKSPERYMENT">TECHNOLOGY & EXPERIMENTATION</span></div>
+  <h2 class="section-title">KRY<span class="x">X</span>OR AI</h2>
+  <div class="ai-panel">
+    <p data-en="We explore the creative potential of artificial intelligence. Combining local AI models, generative tools and custom workflows, we discover new directions in image-making, animation and digital experiences."
+       data-pl="Eksplorujemy możliwości sztucznej inteligencji w kreatywnym procesie. Łączymy lokalne modele AI, narzędzia generatywne i autorskie rozwiązania, aby odkrywać nowe kierunki tworzenia obrazu, animacji i cyfrowych doświadczeń.">
+      We explore the creative potential of artificial intelligence. Combining local AI models, generative tools and custom workflows, we discover new directions in image-making, animation and digital experiences.
+    </p>
+    <div class="ai-tags">
+      <span>LOCAL AI</span><span>GENERATIVE ART</span>
+      <span>CREATIVE WORKFLOWS</span><span>AI EXPERIMENTS</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="content-section" id="portfolio">
+<div class="section-inner">
+  <div class="section-kicker">05 / <span data-en="SELECTED CREATIVE FIELDS" data-pl="WYBRANE OBSZARY">SELECTED CREATIVE FIELDS</span></div>
+  <h2 class="section-title">PORTFOLIO</h2>
+  <p class="section-lead"
+     data-en="A space for original productions, visual experiments and future KRYXOR projects."
+     data-pl="Przestrzeń na prezentację autorskich produkcji, eksperymentów wizualnych i przyszłych realizacji KRYXOR.">
+    A space for original productions, visual experiments and future KRYXOR projects.
+  </p>
+  <div class="portfolio-grid">
+    <article class="portfolio-card"><h3>Original Films</h3><span>COMING SOON</span></article>
+    <article class="portfolio-card"><h3>3D Animation</h3><span>COMING SOON</span></article>
+    <article class="portfolio-card"><h3>Visual Effects</h3><span>COMING SOON</span></article>
+    <article class="portfolio-card"><h3>Digital Characters</h3><span>COMING SOON</span></article>
+    <article class="portfolio-card"><h3>Cinematic Worlds</h3><span>COMING SOON</span></article>
+    <article class="portfolio-card"><h3>Experimental AI</h3><span>COMING SOON</span></article>
+  </div>
+</div>
+</section>
+
+<section class="content-section" id="contact">
+<div class="section-inner">
+  <div class="section-kicker">06 / <span data-en="CONTACT" data-pl="KONTAKT">CONTACT</span></div>
+  <h2 class="section-title" data-en="LET'S CREATE SOMETHING EXTRAORDINARY." data-pl="STWÓRZMY COŚ NIEZWYKŁEGO.">LET'S CREATE SOMETHING EXTRAORDINARY.</h2>
+  <p class="section-lead"
+     data-en="Have an idea, a project or a collaboration proposal? Get in touch."
+     data-pl="Masz pomysł, projekt lub propozycję współpracy? Napisz do nas.">
+    Have an idea, a project or a collaboration proposal? Get in touch.
+  </p>
+  <div class="contact-wrap">
+    <div>
+      <div class="contact-note" data-en="WRITE TO US" data-pl="NAPISZ DO NAS">WRITE TO US</div>
+      <a class="email" href="mailto:contact.kryxor@proton.me">contact.kryxor@proton.me</a>
+    </div>
+    <button class="button" id="copyEmail" data-en="COPY EMAIL ADDRESS" data-pl="KOPIUJ ADRES E-MAIL">COPY EMAIL ADDRESS</button>
+  </div>
+  <p id="copyMessage" class="contact-note" aria-live="polite"></p>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="footer-inner">
+  <a class="logo" href="#start">KRY<span class="x">X</span>OR</a>
+  <div class="footer-links">
+    <a href="#start" data-en="HOME" data-pl="START">HOME</a>
+    <a href="#about" data-en="ABOUT" data-pl="O NAS">ABOUT</a>
+    <a href="#original">ORIGINAL</a>
+    <a href="#studio">STUDIO</a>
+    <a href="#ai">AI</a>
+    <a href="#portfolio">PORTFOLIO</a>
+    <a href="#contact" data-en="CONTACT" data-pl="KONTAKT">CONTACT</a>
+  </div>
+  <div class="language">
+    <button type="button" class="active" data-language="en">EN</button>
+    <span>|</span>
+    <button type="button" data-language="pl">PL</button>
+  </div>
+  <div class="copyright" data-en="© 2026 KRYXOR. ALL RIGHTS RESERVED." data-pl="© 2026 KRYXOR. WSZELKIE PRAWA ZASTRZEŻONE.">
+    © 2026 KRYXOR. ALL RIGHTS RESERVED.
+  </div>
+</div>
+</footer>
+
+<script>
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+menuToggle.addEventListener("click", () => {
+  navLinks.classList.toggle("open");
+});
+
+navLinks.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => navLinks.classList.remove("open"));
+});
+
+function setLanguage(language) {
+  document.documentElement.lang = language;
+
+  document.querySelectorAll("[data-en][data-pl]").forEach(element => {
+    element.textContent = element.dataset[language];
+  });
+
+  document.querySelectorAll("[data-language]").forEach(button => {
+    button.classList.toggle("active", button.dataset.language === language);
+  });
+
+  document.title = language === "pl"
+    ? "KRYXOR — Światy poza granicami wyobraźni"
+    : "KRYXOR — Worlds Beyond Imagination";
+
+  try {
+    localStorage.setItem("kryxor-language", language);
+  } catch (error) {
+    // Strona działa również bez zapisywania preferencji.
+  }
+}
+
+document.querySelectorAll("[data-language]").forEach(button => {
+  button.addEventListener("click", () => setLanguage(button.dataset.language));
+});
+
+// Domyślnie angielski. Jeśli użytkownik wcześniej wybrał język,
+// przeglądarka może przywrócić jego ostatni wybór.
+let initialLanguage = "en";
+try {
+  const savedLanguage = localStorage.getItem("kryxor-language");
+  if (savedLanguage === "pl" || savedLanguage === "en") {
+    initialLanguage = savedLanguage;
+  }
+} catch (error) {}
+
+setLanguage(initialLanguage);
+
+document.getElementById("copyEmail").addEventListener("click", async () => {
+  const email = "contact.kryxor@proton.me";
+  const message = document.getElementById("copyMessage");
+  const language = document.documentElement.lang;
+
+  try {
+    await navigator.clipboard.writeText(email);
+    message.textContent = language === "pl"
+      ? "ADRES SKOPIOWANY!"
+      : "EMAIL ADDRESS COPIED!";
+  } catch (error) {
+    message.textContent = language === "pl"
+      ? "Skopiuj adres ręcznie: " + email
+      : "Copy the address manually: " + email;
+  }
+});
+</script>
+</body>
+</html>
