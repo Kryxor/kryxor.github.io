@@ -4,14 +4,13 @@ const translations = {
     heroTitle: "KRYXOR",
     heroSubtitle: "Własna AI. Na własnych zasadach.",
     heroDescription: "Wdrażamy lokalną sztuczną inteligencję na Twoim komputerze. Dobieramy sprzęt, instalujemy modele i konfigurujemy środowisko, aby AI działała lokalnie — zgodnie z Twoimi potrzebami.",
-    heroButtons: ["Poznaj nasze usługi", "Skontaktuj się"],
+    heroButtons: ["Skontaktuj się", "Usługi"],
     aboutTitle: "Sztuczna inteligencja. Lokalnie.",
     aboutDesc1: "Pomagamy uruchomić modele sztucznej inteligencji na własnym sprzęcie. Od przygotowania komputera i doboru konfiguracji, po instalację, optymalizację i dopasowanie środowiska do codziennej pracy.",
     aboutDesc2: "Lokalne rozwiązania AI dają większą kontrolę nad środowiskiem, umożliwiają pracę bez konieczności przesyłania każdej interakcji do zewnętrznych usług i pozwalają dobrać rozwiązanie do konkretnych zastosowań.",
     servicesTitle: "Nasze usługi",
     service01Title: "01. Wdrożenie w pracowni KRYXOR",
     service01Desc1: "Klient dostarcza własny komputer. Instalujemy modele AI, konfigurujemy środowisko i dopasowujemy ustawienia do możliwości sprzętu.",
-    service01Desc2: "Wybrane wdrożenia mogą zająć około dwóch godzin, zależnie od sprzętu i zakresu prac.",
     service02Title: "02. Odbiór i dostawa sprzętu",
     service02Desc: "Możliwość uzgodnienia odbioru komputera, przeprowadzenia wdrożenia i przekazania przygotowanego sprzętu.",
     service03Title: "03. Wdrożenie u klienta",
@@ -47,11 +46,11 @@ const translations = {
     faqAnswer4: "Tak, modele AI działają lokalnie bez konieczności połączenia z internetem. Wszystkie obliczenia są wykonywane na Twoim komputerze.",
     faqQuestion5: "Czy lokalna AI jest odpowiednia dla firmy?",
     faqAnswer5: "Tak, lokalna AI daje firmom większą kontrolę nad danymi i może być idealnym rozwiązaniem dla organizacji, które mają wysokie wymagania dotyczące prywatności i bezpieczeństwa.",
-    faqQuestion6: "Ile trwa instalacja i konfiguracja?",
-    faqAnswer6: "Proces wdrożenia może zająć od kilku godzin do kilku dni, zależnie od złożoności konfiguracji i potrzeb klienta.",
+    faqQuestion6: "Jakie są korzyści z lokalnej AI?",
+    faqAnswer6: "Lokalna AI zapewnia większą kontrolę nad danymi, lepszą prywatność i bezpieczeństwo, możliwość pracy bez internetu oraz elastyczność w dostosowywaniu rozwiązań do indywidualnych potrzeb.",
     faqQuestion7: "Czy oferujecie pomoc po wdrożeniu?",
     faqAnswer7: "Tak, udzielamy wsparcia technicznego i opieki KRYXOR Care po wdrożeniu.",
-    faqQuestion8: "Jak wygląda wycena?",
+    faqQuestion8: "Jak wygląda wycena usług?",
     faqAnswer8: "Wycena zależy od konfiguracji, modeli AI i zakresu usług. Skontaktuj się z nami, aby uzyskać szczegółowe informacje.",
     contactTitle: "Zacznij od rozmowy.",
     contactDesc: "Opowiedz nam, do czego chcesz wykorzystać lokalną AI. Pomożemy dobrać rozwiązanie i przygotować środowisko dopasowane do Twoich potrzeb.",
@@ -68,14 +67,13 @@ const translations = {
     heroTitle: "KRYXOR",
     heroSubtitle: "Own AI. On your own terms.",
     heroDescription: "We deploy local artificial intelligence on your computer. We select hardware, install models and configure the environment so that AI works locally — according to your needs.",
-    heroButtons: ["Discover our services", "Get in touch"],
+    heroButtons: ["Get in touch", "Services"],
     aboutTitle: "Artificial Intelligence. Locally.",
     aboutDesc1: "We help you run artificial intelligence models on your own hardware. From preparing the computer and selecting configuration, to installation, optimization and adapting the environment to daily work.",
     aboutDesc2: "Local AI solutions give you greater control over the environment, enable work without the need to send each interaction to external services, and allow you to select a solution for specific applications.",
     servicesTitle: "Our services",
     service01Title: "01. Deployment in KRYXOR Lab",
     service01Desc1: "The client provides their own computer. We install AI models, configure the environment and adjust settings to hardware capabilities.",
-    service01Desc2: "Selected deployments may take about two hours, depending on hardware and scope of work.",
     service02Title: "02. Hardware pickup and delivery",
     service02Desc: "Possibility to coordinate pickup of the computer, carry out deployment and hand over the prepared hardware.",
     service03Title: "03. Deployment at client's location",
@@ -111,8 +109,8 @@ const translations = {
     faqAnswer4: "Yes, AI models work locally without needing an internet connection. All computations are performed on your computer.",
     faqQuestion5: "Is local AI suitable for companies?",
     faqAnswer5: "Yes, local AI gives companies greater control over data and can be an ideal solution for organizations with high privacy and security requirements.",
-    faqQuestion6: "How long does installation and configuration take?",
-    faqAnswer6: "The deployment process may take several hours to a few days, depending on the complexity of the configuration and client needs.",
+    faqQuestion6: "What are the benefits of local AI?",
+    faqAnswer6: "Local AI provides greater control over data, better privacy and security, the ability to work offline, and flexibility in tailoring solutions to individual needs.",
     faqQuestion7: "Do you offer support after deployment?",
     faqAnswer7: "Yes, we provide technical support and KRYXOR Care after deployment.",
     faqQuestion8: "How does pricing work?",
@@ -245,17 +243,16 @@ function updateLanguage(lang) {
   document.querySelector('.services h2').textContent = t.servicesTitle;
   document.querySelectorAll('.service-card h3')[0].textContent = t.service01Title;
   document.querySelectorAll('.service-card p')[0].textContent = t.service01Desc1;
-  document.querySelectorAll('.service-card p')[1].textContent = t.service01Desc2;
   document.querySelectorAll('.service-card h3')[1].textContent = t.service02Title;
-  document.querySelectorAll('.service-card p')[2].textContent = t.service02Desc;
+  document.querySelectorAll('.service-card p')[1].textContent = t.service02Desc;
   document.querySelectorAll('.service-card h3')[2].textContent = t.service03Title;
-  document.querySelectorAll('.service-card p')[3].textContent = t.service03Desc;
+  document.querySelectorAll('.service-card p')[2].textContent = t.service03Desc;
   document.querySelectorAll('.service-card h3')[3].textContent = t.service04Title;
-  document.querySelectorAll('.service-card p')[4].textContent = t.service04Desc1;
-  document.querySelectorAll('.service-card p')[5].textContent = t.service04Desc2;
-  document.querySelectorAll('.service-card p')[6].textContent = t.service04Desc3;
+  document.querySelectorAll('.service-card p')[3].textContent = t.service04Desc1;
+  document.querySelectorAll('.service-card p')[4].textContent = t.service04Desc2;
+  document.querySelectorAll('.service-card p')[5].textContent = t.service04Desc3;
   document.querySelectorAll('.service-card h3')[4].textContent = t.service05Title;
-  document.querySelectorAll('.service-card p')[7].textContent = t.service05Desc;
+  document.querySelectorAll('.service-card p')[6].textContent = t.service05Desc;
   
   // Aktualizuj sekcję Sprzęt
   document.querySelector('.hardware h2').textContent = t.hardwareTitle;
@@ -393,7 +390,7 @@ function initAISphere() {
   const connections = [];
   
   // Generowanie punktów
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 120; i++) {
     const angle = Math.random() * Math.PI * 2;
     const radius = Math.random() * radius * 0.8 + radius * 0.1;
     const x = centerX + Math.cos(angle) * radius;
@@ -494,6 +491,33 @@ function initAISphere() {
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius * 1.2, 0, Math.PI * 2);
     ctx.fillStyle = glowGradient;
+    ctx.fill();
+    
+    // Rysowanie centralnej kuli
+    const centerGradient = ctx.createRadialGradient(
+      centerX, centerY, 0,
+      centerX, centerY, radius * 0.3
+    );
+    centerGradient.addColorStop(0, 'rgba(100, 181, 246, 0.9)');
+    centerGradient.addColorStop(1, 'rgba(156, 39, 176, 0.7)');
+    
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius * 0.3, 0, Math.PI * 2);
+    ctx.fillStyle = centerGradient;
+    ctx.fill();
+    
+    // Rysowanie fal pulsujących
+    const pulseRadius = radius * 0.3 + Math.sin(time * 0.02) * 10;
+    const pulseGradient = ctx.createRadialGradient(
+      centerX, centerY, 0,
+      centerX, centerY, pulseRadius
+    );
+    pulseGradient.addColorStop(0, 'rgba(0, 255, 255, 0.3)');
+    pulseGradient.addColorStop(1, 'rgba(100, 181, 246, 0)');
+    
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, pulseRadius, 0, Math.PI * 2);
+    ctx.fillStyle = pulseGradient;
     ctx.fill();
     
     // Aktualizacja czasu dla animacji
