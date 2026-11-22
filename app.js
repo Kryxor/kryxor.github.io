@@ -1,573 +1,583 @@
-/* ===== KRYXOR — app.js (Vanilla JS) ===== */
-(function () {
-  "use strict";
+// app.js
 
-  /* ---------- PRZEŁOŻENIA ---------- */
-  const translations = {
-    pl: {
-      "meta.title": "KRYXOR — Własna AI. Na własnych zasadach.",
-      "meta.desc":
-        "KRYXOR wdraża lokalną sztuczną inteligencję na Twoim komputerze. Dobór sprzętu, instalacja modeli i konfiguracja środowiska — lokalnie, zgodnie z Twoimi potrzebami.",
-      "a11y.skip": "Przejdź do treści",
-      "lang.aria": "Zmiana języka",
-      "menu.aria": "Otwórz menu",
-      "menu.ariaOpen": "Zamknij menu",
+// Przełącznik języka
+const langToggle = document.getElementById('lang-toggle');
+const body = document.body;
+let currentLang = 'pl';
 
-      "nav.start": "Start",
-      "nav.about": "O nas",
-      "nav.services": "Usługi",
-      "nav.hardware": "Sprzęt",
-      "nav.process": "Proces",
-      "nav.faq": "FAQ",
-      "nav.contact": "Kontakt",
-
-      "hero.badge": "Lokalna AI dla firm i osób prywatnych",
-      "hero.slogan": "Własna AI. Na własnych zasadach.",
-      "hero.desc":
-        "Wdrażamy lokalną sztuczną inteligencję na Twoim komputerze. Dobieramy sprzęt, instalujemy modele i konfigurujemy środowisko, aby AI działała lokalnie — zgodnie z Twoimi potrzebami.",
-      "hero.btn.services": "Poznaj nasze usługi",
-      "hero.btn.contact": "Skontaktuj się",
-
-      "about.eyebrow": "O KRYXOR",
-      "about.title": "Sztuczna inteligencja. Lokalnie.",
-      "about.p1":
-        "Pomagamy uruchomić modele sztucznej inteligencji na własnym sprzęcie. Od przygotowania komputera i doboru konfiguracji, po instalację, optymalizację i dopasowanie środowiska do codziennej pracy.",
-      "about.p2":
-        "Lokalne rozwiązania AI dają większą kontrolę nad środowiskiem, umożliwiają pracę bez konieczności przesyłania każdej interakcji do zewnętrznych usług i pozwalają dobrać rozwiązanie do konkretnych zastosowań.",
-
-      "services.eyebrow": "Co robimy",
-      "services.title": "Usługi",
-      "services.subtitle": "Kompleksowe wsparcie na każdym etapie wdrożenia lokalnej AI.",
-      "service.1.title": "Wdrożenie w pracowni KRYXOR",
-      "service.1.desc":
-        "Dostarcz swój komputer, a przygotujemy go do pracy z lokalną sztuczną inteligencją. Instalujemy modele, konfigurujemy środowisko i dopasowujemy ustawienia do możliwości sprzętu.",
-      "service.1.note": "Wybrane wdrożenia mogą zająć około dwóch godzin, zależnie od sprzętu i zakresu prac.",
-      "service.2.title": "Odbiór i dostawa sprzętu",
-      "service.2.desc":
-        "Możliwość uzgodnienia odbioru komputera, przeprowadzenia wdrożenia i przekazania przygotowanego sprzętu.",
-      "service.3.title": "Wdrożenie u klienta",
-      "service.3.desc":
-        "Instalacja i konfiguracja lokalnych rozwiązań AI w domu lub w firmie. Przygotowujemy środowisko do pracy i pomagamy w jego uruchomieniu.",
-      "service.4.title": "Kompletna stacja robocza AI",
-      "service.4.desc":
-        "Pomagamy dobrać komputer Apple Mac lub konfigurację PC z kartą graficzną NVIDIA. Dobór sprzętu zależy od modeli AI, zastosowania, oczekiwanej wydajności i budżetu.",
-      "service.4.note": "Usługa obejmuje doradztwo, przygotowanie konfiguracji oraz możliwość konfiguracji środowiska.",
-      "service.5.title": "KRYXOR Care",
-      "service.5.desc": "Opcjonalna opieka nad lokalnym środowiskiem AI.",
-      "service.5.note":
-        "Pomoc techniczna, aktualizacje, diagnostyka, optymalizacja, konfiguracja i wsparcie w rozwijaniu środowiska.",
-
-      "hardware.eyebrow": "Sprzęt",
-      "hardware.title": "AI dopasowana do Twojego sprzętu.",
-      "hardware.subtitle":
-        "Dobór rozwiązania zależy od modelu AI, pamięci, możliwości sprzętowych, zastosowania oraz budżetu.",
-      "hardware.mac.title": "Apple Mac",
-      "hardware.mac.desc":
-        "Optymalne dla specyficznych zastosowań i modeli AI. Dobór modelu zależy od zapotrzebowania i budżetu.",
-      "hardware.pc.title": "PC / NVIDIA",
-      "hardware.pc.desc":
-        "Rozwiązanie oparte na karcie graficznej NVIDIA. Dobór konfiguracji zależy od modeli AI, oczekiwanej wydajności i budżetu.",
-
-      "process.eyebrow": "Proces",
-      "process.title": "Jak wygląda wdrożenie",
-      "process.1.title": "Rozmowa",
-      "process.1.desc": "Poznajemy potrzeby, zastosowania i oczekiwania.",
-      "process.2.title": "Dobór rozwiązania",
-      "process.2.desc": "Dopasowujemy sprzęt, modele AI i środowisko do indywidualnych potrzeb.",
-      "process.3.title": "Instalacja i konfiguracja",
-      "process.3.desc": "Instalujemy modele, przygotowujemy środowisko i optymalizujemy konfigurację.",
-      "process.4.title": "Uruchomienie i wsparcie",
-      "process.4.desc": "Przekazujemy gotowe rozwiązanie i pomagamy w jego dalszym użytkowaniu.",
-
-      "faq.eyebrow": "FAQ",
-      "faq.title": "Najczęściej zadawane pytania",
-      "faq.q1": "Czym jest lokalna sztuczna inteligencja?",
-      "faq.a1":
-        "Lokalna sztuczna inteligencja to modele AI uruchamiane bezpośrednio na Twoim komputerze zamiast w zewnętrznej chmurze. Dzięki temu masz większą kontrolę nad środowiskiem i nie musisz przesyłać każdej interakcji do zewnętrznych usług.",
-      "faq.q2": "Czy mogę uruchomić AI na swoim obecnym komputerze?",
-      "faq.a2":
-        "W wielu przypadkach tak. Możliwość zależy od modelu AI, dostępnej pamięci i mocy sprzętowej. Po rozmowie ocenimy, czy Twój obecny sprzęt wystarczy, czy potrzebne będą modyfikacje.",
-      "faq.q3": "Czy potrzebuję komputera Apple Mac, czy PC z NVIDIA?",
-      "faq.a3":
-        "Nie ma jednej odpowiedzi. Obie platformy są obsługiwane. Wybór zależy od zastosowania, modeli AI i budżetu. Pomożemy dobrać rozwiązanie do Twoich potrzeb.",
-      "faq.q4": "Czy modele AI działają bez internetu?",
-      "faq.a4":
-        "Sami modele po pobraniu i instalacji zwykle działają lokalnie, bez potrzeby wysyłania danych do zewnętrznych usług. Niektóre modele i etapy konfiguracji mogą jednak wymagać połączenia — zależy to od konkretnego rozwiązania.",
-      "faq.q5": "Czy lokalna AI jest odpowiednia dla firmy?",
-      "faq.a5":
-        "Tak, lokalne rozwiązania AI są często wybierane przez firmy, które chcą większej kontroli nad środowiskiem pracy. Po rozmowie ocenimy, które zastosowania będą odpowiednie dla Twojej organizacji.",
-      "faq.q6": "Ile trwa instalacja i konfiguracja?",
-      "faq.a6":
-        "Zależy od sprzętu i zakresu prac. Wybrane wdrożenia mogą zająć około dwóch godzin. Dokładny czas ustalamy indywidualnie.",
-      "faq.q7": "Czy oferujecie pomoc po wdrożeniu?",
-      "faq.a7":
-        "Tak. Opcjonalna usługa KRYXOR Care obejmuje pomoc techniczną, aktualizacje, diagnostykę, optymalizację i wsparcie w rozwijaniu środowiska.",
-      "faq.q8": "Jak wygląda wycena?",
-      "faq.a8":
-        "Wycenę przygotowujemy indywidualnie po rozmowie. Zależy od zakresu usług, doboru sprzętu oraz wybranego wariantu wdrożenia.",
-
-      "contact.eyebrow": "Kontakt",
-      "contact.title": "Zacznij od rozmowy.",
-      "contact.desc":
-        "Opowiedz nam, do czego chcesz wykorzystać lokalną AI. Pomożemy dobrać rozwiązanie i przygotować środowisko dopasowane do Twoich potrzeb.",
-      "contact.btn.write": "Napisz wiadomość",
-      "contact.btn.copy": "Kopiuj adres e-mail",
-      "contact.copy.success": "Adres skopiowany do schowka.",
-      "contact.copy.error": "Nie udało się skopiować. Skopiuj adres ręcznie.",
-
-      "footer.slogan": "Własna AI. Na własnych zasadach.",
-      "footer.region":
-        "Województwo zachodniopomorskie. Realizacje w innych regionach Polski po indywidualnym uzgodnieniu.",
-      "footer.email": "E-mail",
-      "footer.rights": "© 2026 KRYXOR. Wszelkie prawa zastrzeżone."
-    },
-
-    en: {
-      "meta.title": "KRYXOR — Your own AI. On your own terms.",
-      "meta.desc":
-        "KRYXOR deploys artificial intelligence locally on your computer. Hardware selection, model installation and environment configuration — locally, according to your needs.",
-      "a11y.skip": "Skip to content",
-      "lang.aria": "Change language",
-      "menu.aria": "Open menu",
-      "menu.ariaOpen": "Close menu",
-
-      "nav.start": "Home",
-      "nav.about": "About",
-      "nav.services": "Services",
-      "nav.hardware": "Hardware",
-      "nav.process": "Process",
-      "nav.faq": "FAQ",
-      "nav.contact": "Contact",
-
-      "hero.badge": "Local AI for businesses and individuals",
-      "hero.slogan": "Your own AI. On your own terms.",
-      "hero.desc":
-        "We deploy artificial intelligence locally on your computer. We select hardware, install models and configure the environment so that AI works locally — according to your needs.",
-      "hero.btn.services": "Explore our services",
-      "hero.btn.contact": "Get in touch",
-
-      "about.eyebrow": "About KRYXOR",
-      "about.title": "Artificial intelligence. Locally.",
-      "about.p1":
-        "We help you run artificial intelligence models on your own hardware. From preparing the computer and selecting the configuration to installation, optimization and adapting the environment to daily work.",
-      "about.p2":
-        "Local AI solutions provide greater control over the environment, allow work without the need to send every interaction to external services, and let you choose a solution tailored to specific use cases.",
-
-      "services.eyebrow": "What we do",
-      "services.title": "Services",
-      "services.subtitle": "Comprehensive support at every stage of local AI deployment.",
-      "service.1.title": "Deployment at the KRYXOR workshop",
-      "service.1.desc":
-        "Bring your computer, and we'll prepare it to work with local artificial intelligence. We install models, configure the environment and adjust settings to your hardware's capabilities.",
-      "service.1.note": "Some deployments may take around two hours, depending on the hardware and scope of work.",
-      "service.2.title": "Pickup and delivery of hardware",
-      "service.2.desc":
-        "The option to arrange pickup of the computer, carry out the deployment and hand over the prepared equipment.",
-      "service.3.title": "Deployment at the client's site",
-      "service.3.desc":
-        "Installation and configuration of local AI solutions at home or in a company. We prepare the environment for work and help you start it up.",
-      "service.4.title": "Complete AI workstation",
-      "service.4.desc":
-        "We help you choose an Apple Mac or a PC configuration with an NVIDIA graphics card. Hardware selection depends on the AI models, use case, expected performance and budget.",
-      "service.4.note": "The service includes consulting, configuration preparation and the option of environment configuration.",
-      "service.5.title": "KRYXOR Care",
-      "service.5.desc": "Optional care for your local AI environment.",
-      "service.5.note":
-        "Technical support, updates, diagnostics, optimization, configuration and support in developing the environment.",
-
-      "hardware.eyebrow": "Hardware",
-      "hardware.title": "AI tailored to your hardware.",
-      "hardware.subtitle":
-        "The choice of solution depends on the AI model, memory, hardware capabilities, use case and budget.",
-      "hardware.mac.title": "Apple Mac",
-      "hardware.mac.desc":
-        "Optimal for specific use cases and AI models. The model choice depends on demand and budget.",
-      "hardware.pc.title": "PC / NVIDIA",
-      "hardware.pc.desc":
-        "A solution based on an NVIDIA graphics card. Configuration depends on the AI models, expected performance and budget.",
-
-      "process.eyebrow": "Process",
-      "process.title": "How a deployment works",
-      "process.1.title": "Conversation",
-      "process.1.desc": "We learn about your needs, use cases and expectations.",
-      "process.2.title": "Choosing a solution",
-      "process.2.desc": "We match the hardware, AI models and environment to your individual needs.",
-      "process.3.title": "Installation and configuration",
-      "process.3.desc": "We install models, prepare the environment and optimize the configuration.",
-      "process.4.title": "Launch and support",
-      "process.4.desc": "We hand over the finished solution and help with its further use.",
-
-      "faq.eyebrow": "FAQ",
-      "faq.title": "Frequently asked questions",
-      "faq.q1": "What is local artificial intelligence?",
-      "faq.a1":
-        "Local AI means running AI models directly on your computer instead of in an external cloud. This gives you greater control over the environment and means you don't have to send every interaction to external services.",
-      "faq.q2": "Can I run AI on my current computer?",
-      "faq.a2":
-        "In many cases, yes. It depends on the AI model, available memory and hardware capacity. After a conversation, we'll assess whether your current hardware is sufficient or whether modifications are needed.",
-      "faq.q3": "Do I need an Apple Mac or a PC with NVIDIA?",
-      "faq.a3":
-        "There's no single answer. Both platforms are supported. The choice depends on the use case, AI models and budget. We'll help you pick a solution that fits your needs.",
-      "faq.q4": "Do AI models work without internet?",
-      "faq.a4":
-        "Once downloaded and installed, the models themselves typically run locally, without the need to send data to external services. However, some models and setup steps may require a connection — it depends on the specific solution.",
-      "faq.q5": "Is local AI suitable for a business?",
-      "faq.a5":
-        "Yes, local AI solutions are often chosen by companies that want greater control over their working environment. After a conversation, we'll assess which use cases will suit your organization.",
-      "faq.q6": "How long does installation and configuration take?",
-      "faq.a6":
-        "It depends on the hardware and scope of work. Some deployments can take around two hours. We determine the exact time individually.",
-      "faq.q7": "Do you offer help after deployment?",
-      "faq.a7":
-        "Yes. The optional KRYXOR Care service includes technical support, updates, diagnostics, optimization and support in developing the environment.",
-      "faq.q8": "How does pricing work?",
-      "faq.a8":
-        "We prepare a quote individually after a conversation. It depends on the scope of services, hardware selection and the chosen deployment variant.",
-
-      "contact.eyebrow": "Contact",
-      "contact.title": "Start with a conversation.",
-      "contact.desc":
-        "Tell us what you'd like to use local AI for. We'll help you choose a solution and prepare an environment tailored to your needs.",
-      "contact.btn.write": "Write a message",
-      "contact.btn.copy": "Copy email address",
-      "contact.copy.success": "Email address copied to clipboard.",
-      "contact.copy.error": "Couldn't copy. Please copy the address manually.",
-
-      "footer.slogan": "Your own AI. On your own terms.",
-      "footer.region":
-        "Western Pomeranian Voivodeship. Projects in other regions of Poland by individual arrangement.",
-      "footer.email": "Email",
-      "footer.rights": "© 2026 KRYXOR. All rights reserved."
-    }
-  };
-
-  const EMAIL = "contact.kryxor@proton.me";
-  const STORAGE_KEY = "kryxor-lang";
-
-  /* ---------- POMOCTNICZE ---------- */
-  const $ = (sel, ctx = document) => ctx.querySelector(sel);
-  const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
-
-  /* ---------- JĘZYK ---------- */
-  function applyLang(lang) {
-    if (!translations[lang]) lang = "pl";
-    const dict = translations[lang];
-
-    document.documentElement.lang = lang;
-
-    // title + meta description
-    const title = $("#doc-title");
-    if (title) title.textContent = dict["meta.title"];
-    const meta = $("#meta-description");
-    if (meta) meta.setAttribute("content", dict["meta.desc"]);
-
-    // teksty
-    $$("[data-i18n]").forEach((el) => {
-      const key = el.getAttribute("data-i18n");
-      if (dict[key] !== undefined) el.textContent = dict[key];
-    });
-
-    // aria-label / aria-*
-    $$("[data-i18n-aria]").forEach((el) => {
-      const key = el.getAttribute("data-i18n-aria");
-      if (dict[key] !== undefined) el.setAttribute("aria-label", dict[key]);
-    });
-
-    // aktywny przycisk języka
-    $$(".lang-btn").forEach((btn) => {
-      const active = btn.getAttribute("data-lang") === lang;
-      btn.classList.toggle("is-active", active);
-      btn.setAttribute("aria-pressed", active ? "true" : "false");
-    });
-
-    try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+// Tłumaczenia
+const translations = {
+  pl: {
+    // Menu
+    menuHome: 'Start',
+    menuAbout: 'O nas',
+    menuServices: 'Usługi',
+    menuHardware: 'Sprzęt',
+    menuProcess: 'Proces',
+    menuFAQ: 'FAQ',
+    menuContact: 'Kontakt',
+    
+    // Hero
+    heroTitle: 'KRYXOR',
+    heroTagline: 'Własna AI. Na własnych zasadach.',
+    heroText: 'Wdrażamy lokalną sztuczną inteligencję na Twoim komputerze. Dobieramy sprzęt, instalujemy modele i konfigurujemy środowisko, aby AI działała lokalnie — zgodnie z Twoimi potrzebami.',
+    heroButton1: 'Poznaj nasze usługi',
+    heroButton2: 'Skontaktuj się',
+    
+    // About
+    aboutTitle: 'Sztuczna inteligencja. Lokalnie.',
+    aboutText1: 'Pomagamy uruchomić modele sztucznej inteligencji na własnym sprzęcie. Od przygotowania komputera i doboru konfiguracji, po instalację, optymalizację i dopasowanie środowiska do codziennej pracy.',
+    aboutText2: 'Lokalne rozwiązania AI dają większą kontrolę nad środowiskiem, umożliwiają pracę bez konieczności przesyłania każdej interakcji do zewnętrznych usług i pozwalają dobrać rozwiązanie do konkretnych zastosowań.',
+    
+    // Services
+    servicesTitle: 'Usługi',
+    service1Title: '01. Wdrożenie w pracowni KRYXOR',
+    service1Text1: 'Klient dostarcza własny komputer. Instalujemy modele AI, konfigurujemy środowisko i dopasowujemy ustawienia do możliwości sprzętu.',
+    service1Text2: 'Wybrane wdrożenia mogą zająć około dwóch godzin, zależnie od sprzętu i zakresu prac.',
+    service2Title: '02. Odbiór i dostawa sprzętu',
+    service2Text: 'Możliwość uzgodnienia odbioru komputera, przeprowadzenia wdrożenia i przekazania przygotowanego sprzętu.',
+    service3Title: '03. Wdrożenie u klienta',
+    service3Text: 'Instalacja i konfiguracja lokalnych rozwiązań AI w domu lub w firmie.',
+    service4Title: '04. Kompletna stacja robocza AI',
+    service4Text1: 'Pomagamy dobrać komputer Apple Mac lub konfigurację PC z kartą graficzną NVIDIA.',
+    service4Text2: 'Dobór zależy od modeli AI, zastosowania, oczekiwanej wydajności i budżetu.',
+    service4Text3: 'Usługa obejmuje doradztwo, przygotowanie konfiguracji oraz możliwość konfiguracji środowiska.',
+    service5Title: '05. KRYXOR Care',
+    service5Text: 'Opcjonalna opieka techniczna, aktualizacje, diagnostyka, optymalizacja, konfiguracja i wsparcie w rozwijaniu środowiska AI.',
+    
+    // Hardware
+    hardwareTitle: 'AI dopasowana do Twojego sprzętu.',
+    hardwareMac: 'Apple Mac',
+    hardwareMacText: 'Dobór rozwiązania zależy od modeli AI, pamięci, możliwości sprzętowych, zastosowania i budżetu.',
+    hardwarePC: 'PC / NVIDIA',
+    hardwarePCText: 'Dobór rozwiązania zależy od modeli AI, pamięci, możliwości sprzętowych, zastosowania i budżetu.',
+    
+    // Process
+    processTitle: 'Proces wdrożenia',
+    processStep1: '01 — Rozmowa',
+    processStep1Text: 'Poznajemy potrzeby, zastosowania i oczekiwania.',
+    processStep2: '02 — Dobór rozwiązania',
+    processStep2Text: 'Dopasowujemy sprzęt, modele AI i środowisko do indywidualnych potrzeb.',
+    processStep3: '03 — Instalacja i konfiguracja',
+    processStep3Text: 'Instalujemy modele, przygotowujemy środowisko i optymalizujemy konfigurację.',
+    processStep4: '04 — Uruchomienie i wsparcie',
+    processStep4Text: 'Przekazujemy gotowe rozwiązanie i pomagamy w jego dalszym użytkowaniu.',
+    
+    // FAQ
+    faqTitle: 'FAQ',
+    faqQuestion1: 'Czym jest lokalna sztuczna inteligencja?',
+    faqAnswer1: 'Lokalna sztuczna inteligencja to modele AI działające na Twoim komputerze, bez konieczności przesyłania danych do zewnętrznych serwerów. Umożliwia to większą kontrolę nad danymi i ich prywatność.',
+    faqQuestion2: 'Czy mogę uruchomić AI na swoim obecnym komputerze?',
+    faqAnswer2: 'Możemy ocenić możliwość uruchomienia AI na Twoim komputerze. Wymagania zależą od wybranych modeli i zastosowania.',
+    faqQuestion3: 'Czy potrzebuję komputera Apple Mac, czy PC z NVIDIA?',
+    faqAnswer3: 'Wybór zależy od modeli AI, zastosowania i oczekiwanej wydajności. Możemy dobrać rozwiązanie dopasowane do Twoich potrzeb.',
+    faqQuestion4: 'Czy modele AI działają bez internetu?',
+    faqAnswer4: 'Tak, lokalne modele AI działają całkowicie offline po instalacji.',
+    faqQuestion5: 'Czy lokalna AI jest odpowiednia dla firmy?',
+    faqAnswer5: 'Tak, lokalna AI jest szczególnie odpowiednia dla firm, które chcą zachować kontrolę nad danymi i zapewnić bezpieczeństwo.',
+    faqQuestion6: 'Ile trwa instalacja i konfiguracja?',
+    faqAnswer6: 'Proces wdrożenia może zająć od kilku godzin do dwóch dni, w zależności od złożoności i potrzeb klienta.',
+    faqQuestion7: 'Czy oferujecie pomoc po wdrożeniu?',
+    faqAnswer7: 'Tak, oferujemy opcjonalną opiekę techniczną i wsparcie po wdrożeniu przez usługę KRYXOR Care.',
+    faqQuestion8: 'Jak wygląda wycena?',
+    faqAnswer8: 'Wycena zależy od zakresu usług i potrzeb klienta. Skontaktuj się z nami, aby uzyskać szczegółowe informacje.',
+    
+    // Contact
+    contactTitle: 'Zacznij od rozmowy.',
+    contactText: 'Opowiedz nam, do czego chcesz wykorzystać lokalną AI. Pomożemy dobrać rozwiązanie i przygotować środowisko dopasowane do Twoich potrzeb.',
+    contactButton1: 'Napisz wiadomość',
+    contactButton2: 'Kopiuj adres e-mail',
+    
+    // Footer
+    footerTagline: 'Własna AI. Na własnych zasadach.',
+    footerAddress: 'Województwo zachodniopomorskie. Realizacje w innych regionach Polski po indywidualnym uzgodnieniu.',
+    footerCopyright: '© 2026 KRYXOR. Wszelkie prawa zastrzeżone.\nEngineered by KRYXOR.'
+  },
+  en: {
+    // Menu
+    menuHome: 'Home',
+    menuAbout: 'About',
+    menuServices: 'Services',
+    menuHardware: 'Hardware',
+    menuProcess: 'Process',
+    menuFAQ: 'FAQ',
+    menuContact: 'Contact',
+    
+    // Hero
+    heroTitle: 'KRYXOR',
+    heroTagline: 'Own AI. On your own terms.',
+    heroText: 'We deploy local artificial intelligence on your computer. We select hardware, install models and configure the environment so that AI works locally — according to your needs.',
+    heroButton1: 'Discover our services',
+    heroButton2: 'Get in touch',
+    
+    // About
+    aboutTitle: 'Artificial Intelligence. Locally.',
+    aboutText1: 'We help you run artificial intelligence models on your own hardware. From preparing the computer and selecting the configuration, to installation, optimization and adapting the environment to daily work.',
+    aboutText2: 'Local AI solutions give you greater control over the environment, enable working without having to send each interaction to external services and allow you to choose a solution for specific applications.',
+    
+    // Services
+    servicesTitle: 'Services',
+    service1Title: '01. Deployment in KRYXOR Studio',
+    service1Text1: 'The client provides their own computer. We install AI models, configure the environment and customize settings according to hardware capabilities.',
+    service1Text2: 'Selected deployments may take about two hours, depending on hardware and scope of work.',
+    service2Title: '02. Hardware Pickup and Delivery',
+    service2Text: 'Possibility to coordinate pickup of the computer, perform deployment and hand over the prepared hardware.',
+    service3Title: '03. Deployment at Client Location',
+    service3Text: 'Installation and configuration of local AI solutions at home or in a company.',
+    service4Title: '04. Complete AI Workstation',
+    service4Text1: 'We help select an Apple Mac computer or PC configuration with an NVIDIA graphics card.',
+    service4Text2: 'Selection depends on AI models, application, expected performance and budget.',
+    service4Text3: 'The service includes advice, preparing the configuration and the possibility of configuring the environment.',
+    service5Title: '05. KRYXOR Care',
+    service5Text: 'Optional technical care, updates, diagnostics, optimization, configuration and support in developing the AI environment.',
+    
+    // Hardware
+    hardwareTitle: 'AI tailored to your hardware.',
+    hardwareMac: 'Apple Mac',
+    hardwareMacText: 'The choice of solution depends on AI models, memory, hardware capabilities, application and budget.',
+    hardwarePC: 'PC / NVIDIA',
+    hardwarePCText: 'The choice of solution depends on AI models, memory, hardware capabilities, application and budget.',
+    
+    // Process
+    processTitle: 'Deployment Process',
+    processStep1: '01 — Discussion',
+    processStep1Text: 'We get to know your needs, applications and expectations.',
+    processStep2: '02 — Solution Selection',
+    processStep2Text: 'We match hardware, AI models and environment to your individual needs.',
+    processStep3: '03 — Installation and Configuration',
+    processStep3Text: 'We install the models, prepare the environment and optimize the configuration.',
+    processStep4: '04 — Launch and Support',
+    processStep4Text: 'We hand over the ready solution and help you with its further use.',
+    
+    // FAQ
+    faqTitle: 'FAQ',
+    faqQuestion1: 'What is local artificial intelligence?',
+    faqAnswer1: 'Local artificial intelligence refers to AI models that run on your computer without needing to send data to external servers. This allows for greater control over data and privacy.',
+    faqQuestion2: 'Can I run AI on my current computer?',
+    faqAnswer2: 'We can assess the possibility of running AI on your computer. Requirements depend on selected models and applications.',
+    faqQuestion3: 'Do I need an Apple Mac or a PC with NVIDIA?',
+    faqAnswer3: 'The choice depends on AI models, application and expected performance. We can select a solution tailored to your needs.',
+    faqQuestion4: 'Do AI models work offline?',
+    faqAnswer4: 'Yes, local AI models work completely offline after installation.',
+    faqQuestion5: 'Is local AI suitable for businesses?',
+    faqAnswer5: 'Yes, local AI is particularly suitable for companies that want to maintain control over data and ensure security.',
+    faqQuestion6: 'How long does installation and configuration take?',
+    faqAnswer6: 'The deployment process may take from several hours to two days, depending on complexity and client needs.',
+    faqQuestion7: 'Do you provide support after deployment?',
+    faqAnswer7: 'Yes, we offer optional technical care and support after deployment through the KRYXOR Care service.',
+    faqQuestion8: 'How does pricing work?',
+    faqAnswer8: 'Pricing depends on the scope of services and client needs. Contact us for detailed information.',
+    
+    // Contact
+    contactTitle: 'Start with a conversation.',
+    contactText: 'Tell us what you want to use local AI for. We will help you choose a solution and prepare an environment tailored to your needs.',
+    contactButton1: 'Send message',
+    contactButton2: 'Copy email address',
+    
+    // Footer
+    footerTagline: 'Own AI. On your own terms.',
+    footerAddress: 'West Pomeranian Voivodeship. Realizations in other regions of Poland upon individual agreement.',
+    footerCopyright: '© 2026 KRYXOR. All rights reserved.\nEngineered by KRYXOR.'
   }
+};
 
-  function initLang() {
-    let saved = "pl";
-    try { saved = localStorage.getItem(STORAGE_KEY) || "pl"; } catch (e) {}
-    applyLang(saved);
-
-    $$(".lang-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const next = btn.getAttribute("data-lang");
-        if (next !== document.documentElement.lang) applyLang(next);
-      });
-    });
-  }
-
-  /* ---------- MENU MOBILNE ---------- */
-  function initMenu() {
-    const toggle = $("#menu-toggle");
-    const nav = $(".nav");
-    const navList = $("#nav-list");
-    if (!toggle || !nav) return;
-
-    function openMenu() {
-      nav.classList.add("open");
-      toggle.setAttribute("aria-expanded", "true");
-      toggle.setAttribute("aria-label", "Zamknij menu");
-      document.body.style.overflow = "hidden";
+// Funkcja tłumaczenia
+function translatePage(lang) {
+  currentLang = lang;
+  body.setAttribute('lang', lang);
+  
+  // Aktualizacja menu
+  document.querySelectorAll('#main-nav ul li a').forEach((link, index) => {
+    const sectionId = link.getAttribute('href').substring(1);
+    if (sectionId === 'hero') {
+      link.textContent = translations[lang].menuHome;
+    } else if (sectionId === 'about') {
+      link.textContent = translations[lang].menuAbout;
+    } else if (sectionId === 'services') {
+      link.textContent = translations[lang].menuServices;
+    } else if (sectionId === 'hardware') {
+      link.textContent = translations[lang].menuHardware;
+    } else if (sectionId === 'process') {
+      link.textContent = translations[lang].menuProcess;
+    } else if (sectionId === 'faq') {
+      link.textContent = translations[lang].menuFAQ;
+    } else if (sectionId === 'contact') {
+      link.textContent = translations[lang].menuContact;
     }
-    function closeMenu() {
-      nav.classList.remove("open");
-      toggle.setAttribute("aria-expanded", "false");
-      toggle.setAttribute("aria-label", "Otwórz menu");
-      document.body.style.overflow = "";
-    }
-    function isMobile() { return window.matchMedia("(max-width: 860px)").matches; }
-
-    toggle.addEventListener("click", () => {
-      const open = toggle.getAttribute("aria-expanded") === "true";
-      open ? closeMenu() : openMenu();
-    });
-
-    // klik linku zamyka menu
-    $$(".nav-link").forEach((link) => {
-      link.addEventListener("click", () => {
-        if (nav.classList.contains("open")) closeMenu();
-      });
-    });
-
-    // Escape zamyka menu
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && nav.classList.contains("open")) closeMenu();
-    });
-
-    // zmiana rozmiaru ekranu — przy dużym ekranie wymuś zamknięty stan mobile
-    window.addEventListener("resize", () => {
-      if (!isMobile() && nav.classList.contains("open")) closeMenu();
-    });
-
-    // po przekroczeniu 861px przywróć płynne przewijanie
-    window.addEventListener("resize", () => {
-      if (!isMobile()) document.body.style.overflow = "";
-    });
-  }
-
-  /* ---------- SCROLL HEADER + REVEAL ---------- */
-  function initScroll() {
-    const header = $("#site-header");
-    const onScroll = () => {
-      if (!header) return;
-      header.classList.toggle("scrolled", window.scrollY > 12);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const items = $$(".reveal");
-    if (reduce || !("IntersectionObserver" in window)) {
-      items.forEach((el) => el.classList.add("in"));
-      return;
-    }
-    const io = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in");
-            obs.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
-    );
-    items.forEach((el) => io.observe(el));
-  }
-
-  /* ---------- FAQ (accordion, dostępne) ---------- */
-  function initFaq() {
-    $$(".faq-trigger").forEach((trigger) => {
-      trigger.addEventListener("click", () => {
-        const answer = document.getElementById(trigger.getAttribute("aria-controls"));
-        if (!answer) return;
-        const expanded = trigger.getAttribute("aria-expanded") === "true";
-
-        trigger.setAttribute("aria-expanded", expanded ? "false" : "true");
-        if (expanded) {
-          answer.hidden = true;
-          answer.style.maxHeight = "0px";
-        } else {
-          answer.hidden = false;
-          answer.style.maxHeight = answer.scrollHeight + "px";
-        }
-      });
-    });
-
-    // po zmianie języka przelicz wysokość otwartych odpowiedzi
-    document.addEventListener("faq-updated", () => {
-      $$(".faq-trigger").forEach((trigger) => {
-        if (trigger.getAttribute("aria-expanded") === "true") {
-          const answer = document.getElementById(trigger.getAttribute("aria-controls"));
-          if (answer) answer.style.maxHeight = answer.scrollHeight + "px";
-        }
-      });
-    });
-  }
-
-  /* ---------- KONTAKT: kopiowanie e-maila ---------- */
-  function initContact() {
-    const copyBtn = $("#copy-btn");
-    const status = $("#copy-status");
-    if (!copyBtn || !status) return;
-
-    function showMsg(text, isError) {
-      status.textContent = text;
-      status.classList.add("show");
-      status.classList.toggle("error", !!isError);
-      window.clearTimeout(showMsg._t);
-      showMsg._t = window.setTimeout(() => status.classList.remove("show"), 3200);
-    }
-
-    function fallbackCopy(text) {
-      try {
-        const ta = document.createElement("textarea");
-        ta.value = text;
-        ta.setAttribute("readonly", "");
-        ta.style.position = "fixed";
-        ta.style.opacity = "0";
-        document.body.appendChild(ta);
-        ta.select();
-        const ok = document.execCommand("copy");
-        document.body.removeChild(ta);
-        return ok;
-      } catch (e) {
-        return false;
-      }
-    }
-
-    copyBtn.addEventListener("click", async () => {
-      let ok = false;
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        try {
-          await navigator.clipboard.writeText(EMAIL);
-          ok = true;
-        } catch (e) {
-          ok = fallbackCopy(EMAIL);
-        }
-      } else {
-        ok = fallbackCopy(EMAIL);
-      }
-      const dict = translations[document.documentElement.lang] || translations.pl;
-      if (ok) showMsg(dict["contact.copy.success"], false);
-      else showMsg(dict["contact.copy.error"], true);
-    });
-
-    // upewnij się, że link e-mail wskazuje na właściwy adres
-    const emailLink = $("#email-link");
-    if (emailLink) emailLink.setAttribute("href", "mailto:" + EMAIL);
-  }
-
-  /* ---------- HERO: subtelna wizualizacja sieci ---------- */
-  function initHeroCanvas() {
-    const canvas = $("#hero-canvas");
-    if (!canvas) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    const ctx = canvas.getContext("2d");
-    let w, h, dpr, nodes = [], raf, running = false;
-
-    function resize() {
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      w = canvas.clientWidth;
-      h = canvas.clientHeight;
-      canvas.width = w * dpr;
-      canvas.height = h * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-
-    function buildNodes() {
-      const count = Math.max(14, Math.min(34, Math.floor((w * h) / 38000)));
-      nodes = [];
-      for (let i = 0; i < count; i++) {
-        nodes.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          vx: (Math.random() - 0.5) * 0.25,
-          vy: (Math.random() - 0.5) * 0.25,
-          r: Math.random() * 1.6 + 0.8
-        });
-      }
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, w, h);
-      for (let i = 0; i < nodes.length; i++) {
-        const n = nodes[i];
-        if (!reduce) {
-          n.x += n.vx; n.y += n.vy;
-          if (n.x < 0 || n.x > w) n.vx *= -1;
-          if (n.y < 0 || n.y > h) n.vy *= -1;
-        }
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(150,170,255,0.7)";
-        ctx.fill();
-        for (let j = i + 1; j < nodes.length; j++) {
-          const m = nodes[j];
-          const dx = n.x - m.x, dy = n.y - m.y;
-          const dist = Math.hypot(dx, dy);
-          if (dist < 130) {
-            ctx.beginPath();
-            ctx.moveTo(n.x, n.y);
-            ctx.lineTo(m.x, m.y);
-            ctx.strokeStyle = "rgba(91,140,255," + (0.12 * (1 - dist / 130)).toFixed(3) + ")";
-            ctx.lineWidth = 1;
-            ctx.stroke();
-          }
-        }
-      }
-      if (!reduce) raf = requestAnimationFrame(draw);
-    }
-
-    function start() {
-      if (running) return;
-      running = true;
-      resize();
-      buildNodes();
-      draw();
-    }
-    function stop() {
-      running = false;
-      if (raf) cancelAnimationFrame(raf);
-    }
-
-    if (reduce) {
-      resize();
-      buildNodes();
-      draw(); // jeden statyczny kadr
-      return;
-    }
-
-    window.addEventListener("resize", () => { resize(); buildNodes(); }, { passive: true });
-
-    // pauza gdy karta jest poza ekranem (wydajność)
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver((entries) => {
-        entries.forEach((e) => (e.isIntersecting ? start() : stop()));
-      }).observe(canvas);
-    } else {
-      start();
-    }
-  }
-
-  /* ---------- START ---------- */
-  document.addEventListener("DOMContentLoaded", () => {
-    initLang();
-    initMenu();
-    initScroll();
-    initFaq();
-    initContact();
-    initHeroCanvas();
-
-    // po każdej zmianie języka: przepisane treści mogą zmienić wysokość FAQ
-    window.addEventListener("faq-updated", () => {});
   });
+  
+  // Aktualizacja hero
+  document.querySelector('#hero h1').textContent = translations[lang].heroTitle;
+  document.querySelector('.tagline').textContent = translations[lang].heroTagline;
+  document.querySelector('.hero-text').textContent = translations[lang].heroText;
+  document.querySelectorAll('.hero-buttons .btn')[0].textContent = translations[lang].heroButton1;
+  document.querySelectorAll('.hero-buttons .btn')[1].textContent = translations[lang].heroButton2;
+  
+  // Aktualizacja About
+  document.querySelector('#about h2').textContent = translations[lang].aboutTitle;
+  document.querySelector('#about p').innerHTML = `<p>${translations[lang].aboutText1}</p><p>${translations[lang].aboutText2}</p>`;
+  
+  // Aktualizacja Services
+  document.querySelector('#services h2').textContent = translations[lang].servicesTitle;
+  const serviceCards = document.querySelectorAll('.service-card');
+  serviceCards[0].querySelector('h3').textContent = translations[lang].service1Title;
+  serviceCards[0].querySelector('p').innerHTML = `<p>${translations[lang].service1Text1}</p><p>${translations[lang].service1Text2}</p>`;
+  serviceCards[1].querySelector('h3').textContent = translations[lang].service2Title;
+  serviceCards[1].querySelector('p').textContent = translations[lang].service2Text;
+  serviceCards[2].querySelector('h3').textContent = translations[lang].service3Title;
+  serviceCards[2].querySelector('p').textContent = translations[lang].service3Text;
+  serviceCards[3].querySelector('h3').textContent = translations[lang].service4Title;
+  serviceCards[3].querySelector('p').innerHTML = `<p>${translations[lang].service4Text1}</p><p>${translations[lang].service4Text2}</p><p>${translations[lang].service4Text3}</p>`;
+  serviceCards[4].querySelector('h3').textContent = translations[lang].service5Title;
+  serviceCards[4].querySelector('p').textContent = translations[lang].service5Text;
+  
+  // Aktualizacja Hardware
+  document.querySelector('#hardware h2').textContent = translations[lang].hardwareTitle;
+  document.querySelectorAll('.hardware-item')[0].querySelector('h3').textContent = translations[lang].hardwareMac;
+  document.querySelectorAll('.hardware-item')[0].querySelector('p').textContent = translations[lang].hardwareMacText;
+  document.querySelectorAll('.hardware-item')[1].querySelector('h3').textContent = translations[lang].hardwarePC;
+  document.querySelectorAll('.hardware-item')[1].querySelector('p').textContent = translations[lang].hardwarePCText;
+  
+  // Aktualizacja Process
+  document.querySelector('#process h2').textContent = translations[lang].processTitle;
+  const processSteps = document.querySelectorAll('.step');
+  processSteps[0].querySelector('h3').textContent = translations[lang].processStep1;
+  processSteps[0].querySelector('p').textContent = translations[lang].processStep1Text;
+  processSteps[1].querySelector('h3').textContent = translations[lang].processStep2;
+  processSteps[1].querySelector('p').textContent = translations[lang].processStep2Text;
+  processSteps[2].querySelector('h3').textContent = translations[lang].processStep3;
+  processSteps[2].querySelector('p').textContent = translations[lang].processStep3Text;
+  processSteps[3].querySelector('h3').textContent = translations[lang].processStep4;
+  processSteps[3].querySelector('p').textContent = translations[lang].processStep4Text;
+  
+  // Aktualizacja FAQ
+  document.querySelector('#faq h2').textContent = translations[lang].faqTitle;
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems[0].querySelector('.faq-question').textContent = translations[lang].faqQuestion1;
+  faqItems[0].querySelector('.faq-answer').innerHTML = `<p>${translations[lang].faqAnswer1}</p>`;
+  faqItems[1].querySelector('.faq-question').textContent = translations[lang].faqQuestion2;
+  faqItems[1].querySelector('.faq-answer').innerHTML = `<p>${translations[lang].faqAnswer2}</p>`;
+  faqItems[2].querySelector('.faq-question').textContent = translations[lang].faqQuestion3;
+  faqItems[2].querySelector('.faq-answer').innerHTML = `<p>${translations[lang].faqAnswer3}</p>`;
+  faqItems[3].querySelector('.faq-question').textContent = translations[lang].faqQuestion4;
+  faqItems[3].querySelector('.faq-answer').innerHTML = `<p>${translations[lang].faqAnswer4}</p>`;
+  faqItems[4].querySelector('.faq-question').textContent = translations[lang].faqQuestion5;
+  faqItems[4].querySelector('.faq-answer').innerHTML = `<p>${translations[lang].faqAnswer5}</p>`;
+  faqItems[5].querySelector('.faq-question').textContent = translations[lang].faqQuestion6;
+  faqItems[5].querySelector('.faq-answer').innerHTML = `<p>${translations[lang].faqAnswer6}</p>`;
+  faqItems[6].querySelector('.faq-question').textContent = translations[lang].faqQuestion7;
+  faqItems[6].querySelector('.faq-answer').innerHTML = `<p>${translations[lang].faqAnswer7}</p>`;
+  faqItems[7].querySelector('.faq-question').textContent = translations[lang].faqQuestion8;
+  faqItems[7].querySelector('.faq-answer').innerHTML = `<p>${translations[lang].faqAnswer8}</p>`;
+  
+  // Aktualizacja Contact
+  document.querySelector('#contact h2').textContent = translations[lang].contactTitle;
+  document.querySelector('#contact p').textContent = translations[lang].contactText;
+  document.querySelectorAll('#contact .btn')[0].textContent = translations[lang].contactButton1;
+  document.querySelectorAll('#contact .btn')[1].textContent = translations[lang].contactButton2;
+  
+  // Aktualizacja Footer
+  document.querySelector('#footer .tagline').textContent = translations[lang].footerTagline;
+  document.querySelector('#footer .footer-address').textContent = translations[lang].footerAddress;
+  document.querySelector('#footer .copyright').textContent = translations[lang].footerCopyright;
+}
 
-  // nadpisz applyLang, by emitować zdarzenie po translacji
-  const _origApply = applyLang;
-  applyLang = function (lang) {
-    _origApply(lang);
-    window.dispatchEvent(new Event("faq-updated"));
+// Inicjalizacja tłumaczenia
+translatePage('pl');
+
+// Obsługa przełącznika języka
+langToggle.addEventListener('click', () => {
+  const newLang = currentLang === 'pl' ? 'en' : 'pl';
+  translatePage(newLang);
+});
+
+// Obsługa menu mobilnego
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('main-nav');
+
+hamburger.addEventListener('click', () => {
+  navMenu.classList.toggle('active');
+  
+  // Aktualizacja atrybutów aria-expanded
+  const isExpanded = navMenu.classList.contains('active');
+  hamburger.setAttribute('aria-expanded', isExpanded);
+});
+
+// Zamknięcie menu po kliknięciu w link
+document.querySelectorAll('#main-nav ul li a').forEach(link => {
+  link.addEventListener('click', () => {
+    navMenu.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', false);
+  });
+});
+
+// Zamknięcie menu po naciśnięciu Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    navMenu.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', false);
+  }
+});
+
+// Obsługa FAQ accordion
+document.querySelectorAll('.faq-question').forEach(button => {
+  button.addEventListener('click', () => {
+    const answer = button.nextElementSibling;
+    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+    
+    // Zamknij wszystkie odpowiedzi
+    document.querySelectorAll('.faq-answer').forEach(a => {
+      a.classList.remove('show');
+    });
+    
+    document.querySelectorAll('.faq-question').forEach(b => {
+      b.setAttribute('aria-expanded', false);
+    });
+    
+    // Otwórz aktualną odpowiedź, jeśli była zamknięta
+    if (!isExpanded) {
+      answer.classList.add('show');
+      button.setAttribute('aria-expanded', true);
+    }
+  });
+});
+
+// Animacja kuli AI
+function initAICanvas() {
+  const canvas = document.getElementById('ai-canvas');
+  const ctx = canvas.getContext('2d');
+  
+  // Ustaw rozmiar canvasa
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+  
+  // Właściwości kuli
+  const ball = {
+    x: canvas.width / 2,
+    y: canvas.height / 2,
+    radius: Math.min(canvas.width, canvas.height) * 0.15,
+    rotationX: 0,
+    rotationY: 0,
+    speed: 0.005
   };
-})();
+  
+  // Kolorystyka
+  const colors = {
+    core: '#00f0ff',
+    glow: '#87ceff',
+    wireframe: '#c0c0c0',
+    background: '#000000'
+  };
+  
+  // Generowanie punktów
+  const points = [];
+  const pointCount = 200;
+  
+  for (let i = 0; i < pointCount; i++) {
+    const phi = Math.acos(-1 + (2 * i) / pointCount);
+    const theta = Math.sqrt(pointCount * Math.PI) * phi;
+    
+    points.push({
+      x: Math.sin(phi) * Math.cos(theta),
+      y: Math.sin(phi) * Math.sin(theta),
+      z: Math.cos(phi)
+    });
+  }
+  
+  // Rysowanie kuli
+  function drawBall() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    ball.rotationX += ball.speed;
+    ball.rotationY += ball.speed * 0.5;
+    
+    const centerX = ball.x;
+    const centerY = ball.y;
+    const radius = ball.radius;
+    
+    // Rysowanie wnętrza kuli
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+    ctx.fill();
+    
+    // Rysowanie punktów
+    points.forEach(point => {
+      // Rotacja punktu
+      const x1 = point.x;
+      const y1 = point.y;
+      const z1 = point.z;
+      
+      // Rotacja X
+      const y2 = y1 * Math.cos(ball.rotationX) - z1 * Math.sin(ball.rotationX);
+      const z2 = y1 * Math.sin(ball.rotationX) + z1 * Math.cos(ball.rotationX);
+      
+      // Rotacja Y
+      const x3 = x1 * Math.cos(ball.rotationY) + z2 * Math.sin(ball.rotationY);
+      const z3 = -x1 * Math.sin(ball.rotationY) + z2 * Math.cos(ball.rotationY);
+      
+      // Projektowanie 3D na 2D
+      const scale = 200 / (200 + z3);
+      const x4 = centerX + x3 * scale;
+      const y4 = centerY + y2 * scale;
+      
+      // Wyznacz kolor punktu
+      let pointColor;
+      if (z3 > 0.8) {
+        pointColor = colors.core;
+      } else if (z3 > 0.5) {
+        pointColor = colors.glow;
+      } else {
+        pointColor = colors.wireframe;
+      }
+      
+      // Rysowanie punktu
+      ctx.beginPath();
+      ctx.arc(x4, y4, 1 * scale, 0, Math.PI * 2);
+      ctx.fillStyle = pointColor;
+      ctx.fill();
+    });
+    
+    // Rysowanie linii połączeń
+    for (let i = 0; i < points.length; i++) {
+      for (let j = i + 1; j < points.length; j++) {
+        const p1 = points[i];
+        const p2 = points[j];
+        
+        // Rotacja punktów
+        let x1 = p1.x, y1 = p1.y, z1 = p1.z;
+        let x2 = p2.x, y2 = p2.y, z2 = p2.z;
+        
+        // Rotacja X
+        const y1_rot = y1 * Math.cos(ball.rotationX) - z1 * Math.sin(ball.rotationX);
+        const z1_rot = y1 * Math.sin(ball.rotationX) + z1 * Math.cos(ball.rotationX);
+        const y2_rot = y2 * Math.cos(ball.rotationX) - z2 * Math.sin(ball.rotationX);
+        const z2_rot = y2 * Math.sin(ball.rotationX) + z2 * Math.cos(ball.rotationX);
+        
+        // Rotacja Y
+        const x1_rot = x1 * Math.cos(ball.rotationY) + z1_rot * Math.sin(ball.rotationY);
+        const z1_rot2 = -x1 * Math.sin(ball.rotationY) + z1_rot * Math.cos(ball.rotationY);
+        const x2_rot = x2 * Math.cos(ball.rotationY) + z2_rot * Math.sin(ball.rotationY);
+        const z2_rot2 = -x2 * Math.sin(ball.rotationY) + z2_rot * Math.cos(ball.rotationY);
+        
+        // Projektowanie 3D na 2D
+        const scale1 = 200 / (200 + z1_rot2);
+        const scale2 = 200 / (200 + z2_rot2);
+        const x1_proj = centerX + x1_rot * scale1;
+        const y1_proj = centerY + y1_rot * scale1;
+        const x2_proj = centerX + x2_rot * scale2;
+        const y2_proj = centerY + y2_rot * scale2;
+        
+        // Oblicz odległość
+        const distance = Math.sqrt(
+          Math.pow(x2_proj - x1_proj, 2) +
+          Math.pow(y2_proj - y1_proj, 2)
+        );
+        
+        // Rysowanie linii tylko dla bliskich punktów
+        if (distance < 30 * scale1 && distance < 30 * scale2) {
+          ctx.beginPath();
+          ctx.moveTo(x1_proj, y1_proj);
+          ctx.lineTo(x2_proj, y2_proj);
+          
+          // Ustaw kolor linii
+          let lineColor;
+          if (z1_rot2 > 0.8 || z2_rot2 > 0.8) {
+            lineColor = colors.core;
+          } else if (z1_rot2 > 0.5 || z2_rot2 > 0.5) {
+            lineColor = colors.glow;
+          } else {
+            lineColor = 'rgba(192, 192, 192, 0.3)';
+          }
+          
+          ctx.strokeStyle = lineColor;
+          ctx.lineWidth = 0.5 * scale1;
+          ctx.stroke();
+        }
+      }
+    }
+    
+    // Pulsowanie światła
+    const pulse = Math.sin(Date.now() * 0.002) * 0.1 + 0.9;
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius * pulse, 0, Math.PI * 2);
+    const gradient = ctx.createRadialGradient(
+      centerX, centerY, radius * 0.8,
+      centerX, centerY, radius
+    );
+    gradient.addColorStop(0, 'rgba(0, 240, 255, 0.3)');
+    gradient.addColorStop(1, 'rgba(0, 240, 255, 0)');
+    ctx.fillStyle = gradient;
+    ctx.fill();
+    
+    requestAnimationFrame(drawBall);
+  }
+  
+  // Uruchom animację
+  drawBall();
+}
+
+// Inicjalizacja po załadowaniu strony
+window.addEventListener('load', () => {
+  initAICanvas();
+});
+
+// Obsługa płynnego przewijania
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    const targetId = this.getAttribute('href');
+    if (targetId === '#') return;
+    
+    const targetElement = document.querySelector(targetId);
+    if (targetElement) {
+      window.scrollTo({
+        top: targetElement.offsetTop - 80,
+        behavior: 'smooth'
+      });
+    }
+  });
+});
+
+// Kopiowanie e-maila
+const copyEmailButton = document.getElementById('copy-email');
+if (copyEmailButton) {
+  copyEmailButton.addEventListener('click', () => {
+    const email = 'contact.kryxor@proton.me';
+    
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(email).then(() => {
+        const originalText = copyEmailButton.textContent;
+        copyEmailButton.textContent = 'Skopiowano!';
+        setTimeout(() => {
+          copyEmailButton.textContent = originalText;
+        }, 2000);
+      });
+    } else {
+      // Fallback do starszego sposobu
+      const textArea = document.createElement('textarea');
+      textArea.value = email;
+      document.body.appendChild(textArea);
+      textArea.select();
+      
+      try {
+        document.execCommand('copy');
+        const originalText = copyEmailButton.textContent;
+        copyEmailButton.textContent = 'Skopiowano!';
+        setTimeout(() => {
+          copyEmailButton.textContent = originalText;
+        }, 2000);
+      } catch (err) {
+        console.error('Nie udało się skopiować tekstu: ', err);
+      }
+      
+      document.body.removeChild(textArea);
+    }
+  });
+}
