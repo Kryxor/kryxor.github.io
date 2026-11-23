@@ -3,244 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="KRYXOR - Własna AI. Na własnych zasadach. Lokalna sztuczna inteligencja na Twoim komputerze.">
-    <title>KRYXOR - Własna AI. Na własnych zasadach.</title>
+    <meta name="description" content="KRYXOR - Własna AI. Na własnych zasadach. Lokalne wdrożenia sztucznej inteligencji.">
+    <meta property="og:title" content="KRYXOR">
+    <meta property="og:description" content="Własna AI. Na własnych zasadach.">
+    <meta property="og:type" content="website">
+    <title>KRYXOR | Własna AI. Na własnych zasadach.</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Menu Navigacyjne -->
-    <header class="header" id="header">
+    <header class="header">
         <div class="container">
-            <div class="logo">
-                <h1>KRYXOR</h1>
-            </div>
-            <nav class="nav" id="nav">
+            <div class="logo">KRYXOR</div>
+            <nav class="nav">
                 <ul class="nav-list">
-                    <li><a href="#hero" class="nav-link" data-section="hero">Start</a></li>
-                    <li><a href="#about" class="nav-link" data-section="about">O nas</a></li>
-                    <li><a href="#services" class="nav-link" data-section="services">Usługi</a></li>
-                    <li><a href="#hardware" class="nav-link" data-section="hardware">Sprzęt</a></li>
-                    <li><a href="#process" class="nav-link" data-section="process">Proces</a></li>
-                    <li><a href="#faq" class="nav-link" data-section="faq">FAQ</a></li>
-                    <li><a href="#contact" class="nav-link" data-section="contact">Kontakt</a></li>
+                    <li><a href="#home">HOME</a></li>
+                    <li><a href="#about">ABOUT</a></li>
+                    <li><a href="#services">SERVICES</a></li>
+                    <li><a href="#process">PROCESS</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
                 </ul>
             </nav>
-            <div class="language-switcher">
-                <button id="langToggle">EN</button>
+            <div class="header-actions">
+                <button class="lang-toggle" aria-label="Przełącz język">PL</button>
+                <a href="#contact" class="contact-btn">KONTAKT</a>
             </div>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            <button class="mobile-menu-toggle" aria-label="Otwórz menu" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
         </div>
     </header>
 
-    <!-- Sekcja Hero -->
-    <section class="hero" id="hero">
-        <div class="container hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">KRYXOR</h1>
-                <h2 class="hero-subtitle">Własna AI. Na własnych zasadach.</h2>
-                <p class="hero-description">Wdrażamy lokalną sztuczną inteligencję na Twoim komputerze. Dobieramy sprzęt, instalujemy modele i konfigurujemy środowisko, aby AI działała lokalnie — zgodnie z Twoimi potrzebami.</p>
-                <div class="hero-buttons">
-                    <a href="#contact" class="btn btn-primary">Skontaktuj się</a>
-                    <a href="#services" class="btn btn-secondary">Usługi</a>
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">KRYXOR</h1>
+                    <p class="hero-slogan">Własna AI. Na własnych zasadach.</p>
+                    <p class="hero-description">Lokalne wdrożenia sztucznej inteligencji na Twoim sprzęcie, z pełną kontrolą i niezależnością.</p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn primary">SKONTAKTUJ SIĘ</a>
+                        <a href="#services" class="btn secondary">USŁUGI</a>
+                    </div>
+                </div>
+                <div class="hero-graphics">
+                    <canvas id="ai-globe" width="800" height="600"></canvas>
                 </div>
             </div>
-            <div class="hero-visual">
-                <canvas id="aiSphere" width="400" height="400"></canvas>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Sekcja O nas -->
-    <section class="about" id="about">
-        <div class="container">
-            <h2 class="section-title">Sztuczna inteligencja. Lokalnie.</h2>
-            <p class="about-description">Pomagamy uruchomić modele sztucznej inteligencji na własnym sprzęcie. Od przygotowania komputera i doboru konfiguracji, po instalację, optymalizację i dopasowanie środowiska do codziennej pracy.</p>
-            <p class="about-description">Lokalne rozwiązania AI dają większą kontrolę nad środowiskiem, umożliwiają pracę bez konieczności przesyłania każdej interakcji do zewnętrznych usług i pozwalają dobrać rozwiązanie do konkretnych zastosowań.</p>
-        </div>
-    </section>
-
-    <!-- Sekcja Usługi -->
-    <section class="services" id="services">
-        <div class="container">
-            <h2 class="section-title">Nasze usługi</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>01. Wdrożenie w pracowni KRYXOR</h3>
-                    <p>Klient dostarcza własny komputer. Instalujemy modele AI, konfigurujemy środowisko i dopasowujemy ustawienia do możliwości sprzętu.</p>
-                </div>
-                <div class="service-card">
-                    <h3>02. Odbiór i dostawa sprzętu</h3>
-                    <p>Możliwość uzgodnienia odbioru komputera, przeprowadzenia wdrożenia i przekazania przygotowanego sprzętu.</p>
-                </div>
-                <div class="service-card">
-                    <h3>03. Wdrożenie u klienta</h3>
-                    <p>Instalacja i konfiguracja lokalnych rozwiązań AI w domu lub w firmie.</p>
-                </div>
-                <div class="service-card">
-                    <h3>04. Kompletna stacja robocza AI</h3>
-                    <p>Pomagamy dobrać komputer Apple Mac lub konfigurację PC z kartą graficzną NVIDIA.</p>
-                    <p>Dobór sprzętu zależy od modeli AI, zastosowania, oczekiwanej wydajności i budżetu.</p>
-                    <p>Usługa obejmuje doradztwo, przygotowanie konfiguracji oraz możliwość konfiguracji środowiska.</p>
-                </div>
-                <div class="service-card">
-                    <h3>05. KRYXOR Care</h3>
-                    <p>Opcjonalna opieka techniczna, aktualizacje, diagnostyka, optymalizacja, konfiguracja i pomoc w rozwijaniu środowiska AI.</p>
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">O KRYXOR</h2>
+                <div class="about-content">
+                    <p>KRYXOR specjalizuje się w lokalnych wdrożeniach sztucznej inteligencji. Nasze rozwiązania pozwalają na pracę z AI bez konieczności korzystania z zewnętrznych chmur, zapewniając pełną kontrolę nad danymi i środowiskiem.</p>
+                    <p>Dostosowujemy modele do możliwości Twojego sprzętu, zapewniając optymalną wydajność i bezpieczeństwo.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Sekcja Sprzęt -->
-    <section class="hardware" id="hardware">
-        <div class="container">
-            <h2 class="section-title">AI dopasowana do Twojego sprzętu.</h2>
-            <div class="hardware-content">
-                <div class="hardware-item">
-                    <h3>Apple Mac</h3>
-                    <p>Dobór rozwiązania zależy od modeli AI, pamięci, możliwości sprzętowych, zastosowania i budżetu.</p>
-                </div>
-                <div class="hardware-item">
-                    <h3>PC / NVIDIA</h3>
-                    <p>Dobór rozwiązania zależy od modeli AI, pamięci, możliwości sprzętowych, zastosowania i budżetu.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sekcja Proces -->
-    <section class="process" id="process">
-        <div class="container">
-            <h2 class="section-title">Jak to działa</h2>
-            <div class="process-steps">
-                <div class="step">
-                    <div class="step-number">01</div>
-                    <h3>Rozmowa</h3>
-                    <p>Poznajemy potrzeby, zastosowania i oczekiwania.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">02</div>
-                    <h3>Dobór rozwiązania</h3>
-                    <p>Dopasowujemy sprzęt, modele AI i środowisko do indywidualnych potrzeb.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">03</div>
-                    <h3>Instalacja i konfiguracja</h3>
-                    <p>Instalujemy modele, przygotowujemy środowisko i optymalizujemy konfigurację.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">04</div>
-                    <h3>Uruchomienie i wsparcie</h3>
-                    <p>Przekazujemy gotowe rozwiązanie i pomagamy w jego dalszym użytkowaniu.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sekcja FAQ -->
-    <section class="faq" id="faq">
-        <div class="container">
-            <h2 class="section-title">Często zadawane pytania</h2>
-            <div class="accordion" id="faqAccordion">
-                <div class="accordion-item">
-                    <button class="accordion-button" aria-expanded="false" aria-controls="faq1">
-                        Czym jest lokalna sztuczna inteligencja?
-                    </button>
-                    <div class="accordion-content" id="faq1">
-                        <p>Lokalna sztuczna inteligencja to modele AI działające na Twoim komputerze, bez konieczności przesyłania danych do zewnętrznych serwisów. Dzięki temu masz większą kontrolę nad swoimi danymi i lepszą prywatność.</p>
+        <section id="services" class="services">
+            <div class="container">
+                <h2 class="section-title">USŁUGI</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>WDROŻENIE W PRACOWNI KRYXOR</h3>
+                        <p>Klient dostarcza własny komputer. Dobieramy modele, instalujemy i konfigurujemy środowisko AI dostosowane do możliwości sprzętu.</p>
                     </div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-button" aria-expanded="false" aria-controls="faq2">
-                        Czy mogę uruchomić AI na swoim obecnym komputerze?
-                    </button>
-                    <div class="accordion-content" id="faq2">
-                        <p>Możemy sprawdzić, czy Twój komputer spełnia minimalne wymagania. Wiele modeli AI działa na komputerach z podstawową konfiguracją, ale wydajność zależy od specyfiki sprzętu.</p>
+                    <div class="service-card">
+                        <h3>ODBIÓR I DOSTAWA SPRZĘTU</h3>
+                        <p>Indywidualne uzgodnienie odbioru sprzętu, wykonanie wdrożenia i przekazanie skonfigurowanego urządzenia.</p>
                     </div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-button" aria-expanded="false" aria-controls="faq3">
-                        Czy potrzebuję komputera Apple Mac, czy PC z NVIDIA?
-                    </button>
-                    <div class="accordion-content" id="faq3">
-                        <p>Zależy od modeli AI, które chcesz uruchomić. Niektóre modele działają na różnych systemach, ale do bardziej zaawansowanych zastosowań zaleca się komputery z kartą graficzną NVIDIA.</p>
+                    <div class="service-card">
+                        <h3>WDROŻENIE U KLIENTA</h3>
+                        <p>Instalacja i konfiguracja lokalnego środowiska AI w domu lub firmie klienta, dostosowana do konkretnego sprzętu i warunków.</p>
                     </div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-button" aria-expanded="false" aria-controls="faq4">
-                        Czy modele AI działają bez internetu?
-                    </button>
-                    <div class="accordion-content" id="faq4">
-                        <p>Tak, modele AI działają lokalnie bez konieczności połączenia z internetem. Wszystkie obliczenia są wykonywane na Twoim komputerze.</p>
+                    <div class="service-card">
+                        <h3>KOMPLETNA STACJA ROBOCZA AI</h3>
+                        <p>Pomoc w doborze odpowiedniego sprzętu (Apple Mac, PC, NVIDIA) do lokalnej sztucznej inteligencji, z uwzględnieniem potrzeb i budżetu.</p>
                     </div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-button" aria-expanded="false" aria-controls="faq5">
-                        Czy lokalna AI jest odpowiednia dla firmy?
-                    </button>
-                    <div class="accordion-content" id="faq5">
-                        <p>Tak, lokalna AI daje firmom większą kontrolę nad danymi i może być idealnym rozwiązaniem dla organizacji, które mają wysokie wymagania dotyczące prywatności i bezpieczeństwa.</p>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-button" aria-expanded="false" aria-controls="faq6">
-                        Jakie są korzyści z lokalnej AI?
-                    </button>
-                    <div class="accordion-content" id="faq6">
-                        <p>Lokalna AI zapewnia większą kontrolę nad danymi, lepszą prywatność i bezpieczeństwo, możliwość pracy bez internetu oraz elastyczność w dostosowywaniu rozwiązań do indywidualnych potrzeb.</p>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-button" aria-expanded="false" aria-controls="faq7">
-                        Czy oferujecie pomoc po wdrożeniu?
-                    </button>
-                    <div class="accordion-content" id="faq7">
-                        <p>Tak, udzielamy wsparcia technicznego i opieki KRYXOR Care po wdrożeniu.</p>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-button" aria-expanded="false" aria-controls="faq8">
-                        Jak wygląda wycena usług?
-                    </button>
-                    <div class="accordion-content" id="faq8">
-                        <p>Wycena zależy od konfiguracji, modeli AI i zakresu usług. Skontaktuj się z nami, aby uzyskać szczegółowe informacje.</p>
+                    <div class="service-card">
+                        <h3>KRYXOR CARE</h3>
+                        <p>Opcjonalna opieka techniczna po wdrożeniu: pomoc techniczna, diagnostyka, optymalizacja, aktualizacje i wsparcie w użytkowaniu.</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Sekcja Kontakt -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2 class="section-title">Zacznij od rozmowy.</h2>
-            <p class="contact-description">Opowiedz nam, do czego chcesz wykorzystać lokalną AI. Pomożemy dobrać rozwiązanie i przygotować środowisko dopasowane do Twoich potrzeb.</p>
-            <div class="contact-info">
-                <a href="mailto:contact.kryxor@proton.me" class="email-link">contact.kryxor@proton.me</a>
+        <section id="area" class="area">
+            <div class="container">
+                <h2 class="section-title">OBSZAR DZIAŁANIA</h2>
+                <p>Główny obszar naszej działalności to województwo zachodniopomorskie. Realizacje w innych regionach Polski możliwe po indywidualnym uzgodnieniu.</p>
+            </div>
+        </section>
+
+        <section id="process" class="process">
+            <div class="container">
+                <h2 class="section-title">PROCES WSPÓŁPRACY</h2>
+                <div class="process-steps">
+                    <div class="process-step">
+                        <h3>1. ROZMOWA</h3>
+                        <p>Poznanie potrzeb klienta, oczekiwań i sposobu wykorzystania AI.</p>
+                    </div>
+                    <div class="process-step">
+                        <h3>2. DOBÓR ROZWIĄZANIA</h3>
+                        <p>Dobór modeli, środowiska i ewentualnego sprzętu.</p>
+                    </div>
+                    <div class="process-step">
+                        <h3>3. WDROŻENIE</h3>
+                        <p>Instalacja, konfiguracja i przygotowanie środowiska.</p>
+                    </div>
+                    <div class="process-step">
+                        <h3>4. URUCHOMIENIE</h3>
+                        <p>Przekazanie przygotowanego rozwiązania i ewentualne wsparcie.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="faq">
+            <div class="container">
+                <h2 class="section-title">FAQ</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            Czym jest lokalna AI?
+                        </button>
+                        <div class="faq-answer">
+                            <p>Lokalna AI to rozwiązanie, w którym modele sztucznej inteligencji działają bezpośrednio na Twoim komputerze, bez konieczności korzystania z zewnętrznych serwerów chmurowych. Zapewnia to większą prywatność i kontrolę nad danymi.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            Czy mogę wykorzystać swój obecny komputer?
+                        </button>
+                        <div class="faq-answer">
+                            <p>Tak, możliwe jest dostosowanie lokalnej AI do większości współczesnych komputerów. Nasz zespół dokona oceny możliwości Twojego sprzętu i zaproponuje optymalne rozwiązanie.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            Jakie znaczenie ma wybór Apple Mac czy PC/NVIDIA?
+                        </button>
+                        <div class="faq-answer">
+                            <p>Wybór platformy zależy od Twoich potrzeb i preferencji. Apple Mac oferuje stabilność i dobre wsparcie dla niektórych modeli AI, podczas gdy PC z kartą graficzną NVIDIA często zapewnia lepszą wydajność w przypadku zaawansowanych obliczeń.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            Czy lokalne modele mogą działać bez internetu?
+                        </button>
+                        <div class="faq-answer">
+                            <p>Tak, po wdrożeniu lokalne modele AI mogą działać bez stałego połączenia z internetem. Wszystkie niezbędne dane i modele są przechowywane lokalnie na Twoim komputerze.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            Czy lokalna AI może być wykorzystywana w firmie?
+                        </button>
+                        <div class="faq-answer">
+                            <p>Oczywiście. Lokalna AI jest idealnym rozwiązaniem dla firm, które chcą zachować kontrolę nad swoimi danymi i unikać zależności od zewnętrznych dostawców chmurowych.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title">KONTAKT</h2>
+                <p class="contact-description">Masz pytania lub chcesz umówić się na konsultację? Skontaktuj się z nami.</p>
+                <div class="contact-email">contact.kryxor@proton.me</div>
                 <div class="contact-buttons">
-                    <a href="mailto:contact.kryxor@proton.me" class="btn btn-primary">Napisz wiadomość</a>
-                    <button id="copyEmailBtn" class="btn btn-secondary">Kopiuj adres e-mail</button>
+                    <button class="btn email-btn" data-action="mailto">NAPISZ WIADOMOŚĆ</button>
+                    <button class="btn copy-btn" data-action="copy">KOPIUJ ADRES E-MAIL</button>
                 </div>
+                <div class="contact-feedback" id="contact-feedback"></div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Stopka -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo">
-                    <h2>KRYXOR</h2>
-                </div>
-                <p class="footer-subtitle">Własna AI. Na własnych zasadach.</p>
-                <p class="footer-info">Województwo zachodniopomorskie. Realizacje w innych regionach Polski po indywidualnym uzgodnieniu.</p>
-                <div class="footer-contact">
-                    <a href="mailto:contact.kryxor@proton.me" class="email-link">contact.kryxor@proton.me</a>
-                </div>
-                <p class="footer-copyright">© 2026 KRYXOR. Wszelkie prawa zastrzeżone.<br>Engineered by KRYXOR.</p>
+                <div class="footer-logo">KRYXOR</div>
+                <p class="footer-description">Lokalne wdrożenia sztucznej inteligencji na Twoim sprzęcie.</p>
+                <nav class="footer-nav">
+                    <ul>
+                        <li><a href="#home">HOME</a></li>
+                        <li><a href="#about">ABOUT</a></li>
+                        <li><a href="#services">SERVICES</a></li>
+                        <li><a href="#contact">CONTACT</a></li>
+                    </ul>
+                </nav>
+                <div class="footer-email">contact.kryxor@proton.me</div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 KRYXOR. Wszelkie prawa zastrzeżone.</p>
+                <p>Engineered by KRYXOR.</p>
             </div>
         </div>
     </footer>
